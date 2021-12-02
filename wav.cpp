@@ -1,6 +1,24 @@
 #include <iostream>
 #include <fstream>
-#include "wave_header.h"
+#include "wav.h"
+
+// File is read assuming it can be opened
+bool Wav::read_file(const std::string filename){
+    std::ifstream file(filename, std::ios::binary | std::ios::in);
+    if (file.is_open()) {
+        auto header = readHeader(file);
+        auto buffer = new unsigned char[header.data_bytes];
+        file.read(( char*) buffer, header.data_bytes);
+        file.close();
+        return true;
+    }
+    else{
+        std::cout << "There was an error opening the file" << std::endl;
+        return false;
+    }
+
+}
+
 
 wav_header readHeader(std::ifstream& file);
 
