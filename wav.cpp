@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "waveheader.h"
+
 void Wav::readFile(const std::string &fileName) { 
     std::ifstream file(fileName,std::ios::binary | std::ios::in); 
     if(file.is_open()){ 
