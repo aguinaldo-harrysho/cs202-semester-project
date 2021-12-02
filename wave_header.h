@@ -33,7 +33,7 @@ typedef struct wav_header {
     char fmt_header[4]; // Contains "fmt " (includes trailing space)
     int fmt_chunk_size; // Should be 16 for PCM
     short audio_format; // Should be 1 for PCM. 3 for IEEE Float
-    short num_channels;
+    short num_channels; // Either 1 or 2 for mono or stereo
     int sample_rate;
     int byte_rate; // Number of bytes per second. sample_rate * num_channels * Bytes Per Sample
     short sample_alignment; // num_channels * Bytes Per Sample
