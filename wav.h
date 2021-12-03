@@ -7,7 +7,7 @@ class Wav {
     //wav_header header;
 public:
     Wav(const std::string);
-    void printHeader(std::string, wav_header);
+    //void printHeader(std::string, wav_header);
 };
  
 #endif
