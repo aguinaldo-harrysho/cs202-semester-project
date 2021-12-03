@@ -1,32 +1,37 @@
 # cs202-semester-project
 
-The Wav class in wav.h should be static, no need to initialize.
-Pass a file into a method of the Wav class to first determine if it can be opened
-read_file
-If ture, read the header and determine if it is a WAV file
-read_header
-returns a wav_header type, a different class is responsible for determining is things remain true througout this processs
+### TODO:
+After passing a file through the Reader class, pass the filename to the actual Wav reader (header and body)
 
+### Responsibilites:
+Driver & Metadata - Alexander P
+UI - Harrumakii
 
-Driver & Metadata - Dylan Perkins
-Echo - Alexander P
-Gain - Harrumakii
 Normalization - MistaHouse
+Echo - Dylan Perkins
+Gain Adjustment - 
 
-Program Flow:
-   - Start: Present start menu
-   - If user selects quit, exit program
-   - Else
-   - Request filename from user
-   - Open file specified by filename
-   - If file does not exist or file is not wav file
-     - Display error message and goto start
-   - else
-     - read file metadata
-   - (1) display metadata to user
-     -  present user with processor menu
-     -  If user selects processor option
-     -  request output filename
-     -  run processor
-     -  save file
-     -  goto Start
+
+## Program Flow:
+   1. Start: Present start menu
+      - If user selects quit, exit program
+   2. Else
+      - Request filename from user
+      - Open file specified by filename
+        - If file does not exist or file is not wav file
+        - Display error message and goto start
+   3. Else
+      - read file metadata
+   4. Display metadata to user *
+      -  Present user with processor menu
+      -  If user selects processor option
+      -  Request output filename
+      -  Run processor
+      -  Save file
+      -  Goto Start
+
+(*) In order:
+1. Filename
+2. Sample rate
+3. Bits per sample
+4. Stereo or mono
