@@ -8,7 +8,7 @@
 void printStartMenu();
 void printProcessorMenu();
 void handleMenu1();
-void printMetaData(const wav_header *header);
+void printMetaData(wav_header header);
 
 int main(){
 
@@ -74,18 +74,27 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         std::cout << "There was an error opening the file" << std::endl;
         exit(0); // Currently just exits the program, maybe change later to keep the rpogram running
     }
-    
-    if(Reader::read_header(filename)) std::cout << "WAV successfully file identified.\n" << std::endl;
+
+    wav_header audiofile_header = Reader::read_header(filename); //Read the header of the file
+    if(Reader::check_header(audiofile_header))
+    {
+        std::cout << "WAV successfully file identified.\n" << std::endl;
+    }
     else
     {
         std::cout << "There was an error identifying the filetype." << std::endl;
         exit(0); // Currently just exits the program, maybe change later to keep the rpogram running
     }
-    
+    // Assuming we make it here, we now have audiofile_header of type wav_header. It is the header data of the specified file.
+
+    // Print header metadata
+    printMetaData(audiofile_header);
+    std::cout << std::endl;
+
     //[function to open file, store its contents in memory, then close it]
     Wav* audiofile = new Wav(filename);
-
-    //printMetaData();
+    
+    
 
     printProcessorMenu();
 
@@ -107,17 +116,15 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
             exit;
 
     }
-
-
 }
 
-void printMetaData(const wav_header *header){
+void printMetaData(wav_header header){
 
     std::cout << "File Metadata:" << std::endl;
     std::cout << "----------------------------------------" << std::endl;
-    std::cout << "Wav Size: " << header->wav_size << std::endl;
-    std::cout << "# Channels: " << header->num_channels << std::endl;
-    std::cout << "Sample Rate: " << header->sample_rate << std::endl;
-    std::cout << "Bit Depth: " << header->bit_depth << std::endl;
+    std::cout << "Wav Size: " << header.wav_size << std::endl;
+    std::cout << "# Channels: " << header.num_channels << std::endl;
+    std::cout << "Sample Rate: " << header.sample_rate << std::endl;
+    std::cout << "Bit Depth: " << header.bit_depth << std::endl;
 
 }
