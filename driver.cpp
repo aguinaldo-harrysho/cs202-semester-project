@@ -11,30 +11,36 @@ void handleMenu1();
 void printMetaData(wav_header header);
 
 int main(){
-
-    printStartMenu();
     
-    int input = 0;
+    int input = 1;
 
     char filename[64];
 
-    //std::cin >> input;
-    input = 1; // Disabled input for testing, re-enable when done developing
-    std::cout << "1" << std::endl; // To visually simualte selecting "1". Delete when done
-    std::cout << std::endl;
+    while (input!=0) {
 
-    switch(input){
+        printStartMenu();
 
-        case 1:
-            
-            handleMenu1();
-            break;
+        std::cin >> input;
+        //input = 1; // Disabled input for testing, re-enable when done developing
+        //std::cout << "1" << std::endl; // To visually simualte selecting "1". Delete when done
+        std::cout << std::endl;
 
-        case 0:
-            exit;
+        switch(input){
 
+            case 1:
+                
+                handleMenu1();
+                input = 0;
+                break;
+
+            case 0:
+                exit(1);
+                break;
+            default:
+                std::cout << "Please select an option from the menu\n" << std::endl;
+
+        }
     }
-
 }
 
 void printStartMenu(){
@@ -51,14 +57,14 @@ void printProcessorMenu(){
     //std::cout << "Processor Menu\n" << std::endl;
     std::cout << "Please select a processor:" << std::endl;
     std::cout << "----------------------------------------" << std::endl;
-    std::cout << "[1] Echo\n[2] Gain\n[3] Normalization\n[0] Exit the program" <<std::endl;
+    std::cout << "[1] Echo\n[2] Gain\n[3] Normalization\n[0] Exit to start" <<std::endl;
 
 }
 
 void handleMenu1(){//Executes when user chooses option 1 from main menu
 
     std::string filename;
-    char input;
+    int input = 1;
 
     std::cout << "Please enter a .wav filename: " << std::endl;
     //std::cin >> filename;
@@ -92,29 +98,39 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     std::cout << std::endl;
 
     //[function to open file, store its contents in memory, then close it]
-    Wav* audiofile = new Wav(filename);
-    
-    
+    Wav* audiofile = new Wav(filename);    
 
-    printProcessorMenu();
+    while(input!=0){
 
-    switch(input){
+        printProcessorMenu();
 
-        case 1:
+        std::cin >> input;
 
-            break;
-        case 2:
+        switch(input){
 
-            break;
-        case 3:
+            case 1:
 
-            break;
-        case 4:
+                input = 0;
+                break;
+            case 2:
 
-            break;
-        case 0:
-            exit;
+                input = 0;
+                break;
+            case 3:
 
+                input = 0;
+                break;
+            case 4:
+
+                input = 0;
+                break;
+            case 0:
+                input = 0;
+                break;
+            default:
+                std::cout << "Please select an option from the menu\n" << std::endl;
+
+        }
     }
 }
 
