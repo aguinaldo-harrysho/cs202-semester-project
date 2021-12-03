@@ -2,48 +2,9 @@
 #include <fstream>
 #include "wav.h"
 
-// File is read assuming it can be opened
-bool Wav::read_file(const std::string filename){
-    std::ifstream file(filename, std::ios::binary | std::ios::in);
-    if (file.is_open()) {
-        auto header = readHeader(file);
-        auto buffer = new unsigned char[header.data_bytes];
-        file.read(( char*) buffer, header.data_bytes);
-        file.close();
-        return true;
-    }
-    else{
-        std::cout << "There was an error opening the file" << std::endl;
-        return false;
-    }
-
-}
 
 
 wav_header readHeader(std::ifstream& file);
-
-// Reads the file
-void readFile(const std::string &fileName){
-    std::ifstream file(fileName, std::ios::binary | std::ios::in);
-    if (file.is_open()) {
-        auto header = readHeader(file);
-        auto buffer = new unsigned char[header.data_bytes];
-        file.read(( char*) buffer, header.data_bytes);
-        file.close();
-    }
-}
-
-// Reads the header of the file
-wav_header readHeader(const std::string& fileName){
-    std::cout << "I made it here" << std::endl;
-    std::ifstream file(fileName, std::ios::binary | std::ios::in);
-    wav_header header;
-    if (file.is_open()) {
-        file.read(( char*) &header, sizeof(header));
-        file.close();
-    }
-    return header;
-}
 
 wav_header readHeader(std::ifstream &file) {
     std::cout << "I made it here too" << std::endl;

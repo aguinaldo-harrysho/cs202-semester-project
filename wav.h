@@ -7,8 +7,7 @@ class Wav {
     wav_header header;
     bool isValid;
 public:
-    Wav() = default;
-    bool read_file(const std::string);
+    //Wav() = default;
 };
  
 #endif
