@@ -20,10 +20,11 @@ Gain Adjustment -
       - Open file specified by filename ✔️
         - If file does not exist or file is not wav file ✔️
         - Display error message and goto start ✔️
-   3. Otherwise ❌
-      - Read file metadata ❌
-   4. Display metadata to user *
-      - Present user with processor menu
+   3. Otherwise ✔️
+      - Read file metadata ✔️
+      - Read file audio data ❌
+   4. Display metadata to user * ✔️
+      - Present user with processor menu ✔️
       - If user selects processor option
       - Request output filename
       - Run processor
