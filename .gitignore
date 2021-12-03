@@ -1,0 +1,6 @@
+# ignore .vscode
+*.vscode
+# ignore all object files since they are temporary
+*.o
+# ignore the driver file
+driver

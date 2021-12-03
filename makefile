@@ -1,8 +1,7 @@
-wavprocessor: driver.o
-	g++ -o wavprocessor driver.o
-
-driver.o: driver.cpp
-	g++ -c driver.cpp
-
+all: wavprocessor
+wavprocessor: driver.cpp reader.o
+		g++ -o wavprocessor driver.cpp reader.o
+reader.o: reader.cpp reader.h
+		g++ -c reader.cpp
 clean:
-	rm *.o
+		rm wavprocessor *.o 
