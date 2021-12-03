@@ -120,10 +120,6 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
 
                 input = 0;
                 break;
-            case 4:
-
-                input = 0;
-                break;
             case 0:
                 input = 0;
                 break;
