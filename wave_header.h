@@ -2,6 +2,8 @@
 // Created by Keith Lancaster on 11/22/21.
 //
 
+#include <string>
+
 #ifndef WAVE_HEADER_WAVE_HEADER_H
 #define WAVE_HEADER_WAVE_HEADER_H
 

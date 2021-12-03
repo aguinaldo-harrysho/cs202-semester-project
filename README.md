@@ -13,22 +13,22 @@ Gain Adjustment -
 
 
 ## Program Flow:
-   1. Start: Present start menu
-      - If user selects quit, exit program
-   2. Else
-      - Request filename from user
-      - Open file specified by filename
-        - If file does not exist or file is not wav file
-        - Display error message and goto start
-   3. Else
-      - read file metadata
+   1. Start: Present start menu ✔️
+      - If user selects quit, exit program ✔️
+   2. Else ✔️
+      - Request filename from user ❗ (Disabled for testing)
+      - Open file specified by filename ✔️
+        - If file does not exist or file is not wav file ✔️
+        - Display error message and goto start ✔️
+   3. Otherwise ❌
+      - Read file metadata ❌
    4. Display metadata to user *
-      -  Present user with processor menu
-      -  If user selects processor option
-      -  Request output filename
-      -  Run processor
-      -  Save file
-      -  Goto Start
+      - Present user with processor menu
+      - If user selects processor option
+      - Request output filename
+      - Run processor
+      - Save file
+      - Goto Start
 
 (*) In order:
 1. Filename

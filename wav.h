@@ -4,10 +4,10 @@
 #include "wave_header.h"
  
 class Wav {
-    wav_header header;
-    bool isValid;
+    //wav_header header;
 public:
-    //Wav() = default;
+    Wav(const std::string);
+    void printHeader(std::string, wav_header);
 };
  
 #endif

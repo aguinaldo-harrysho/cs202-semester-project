@@ -3,6 +3,7 @@
 #include <string>
 #include "wave_header.h"
 #include "reader.h"
+#include "wav.h"
 
 void printStartMenu();
 void printProcessorMenu();
@@ -17,7 +18,9 @@ int main(){
 
     char filename[64];
 
-    std::cin >> input;
+    //std::cin >> input;
+    input = 1; // Disabled input for testing, re-enable when done developing
+    std::cout << "1" << std::endl; // To visually simualte selecting "1". Delete when done
     std::cout << std::endl;
 
     switch(input){
@@ -36,16 +39,16 @@ int main(){
 
 void printStartMenu(){
 
-    std::cout << "Welcome\n\nPlease select an option:" << std::endl;
+    std::cout << "Welcome\nPlease select an option:" << std::endl;
     std::cout << "----------------------------------------" << std::endl;
-    std::cout << "[1] Apply a processor to a .wav file" << std::endl;
+    std::cout << "[1] Open a .WAV file" << std::endl;
     std::cout << "[0] Exit the program" << std::endl;
 
 }
 
 void printProcessorMenu(){
 
-    std::cout << "Processor Menu\n" << std::endl;
+    //std::cout << "Processor Menu\n" << std::endl;
     std::cout << "Please select a processor:" << std::endl;
     std::cout << "----------------------------------------" << std::endl;
     std::cout << "[1] Echo\n[2] Gain\n[3] Normalization\n[0] Exit the program" <<std::endl;
@@ -59,7 +62,8 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
 
     std::cout << "Please enter a .wav filename: " << std::endl;
     //std::cin >> filename;
-    filename = "yes-8-bit-mono.wav"; // Filename explicitly defined for testing, return to normal when done
+    filename = "yes-8-bit-mono.wav"; // Filename explicitly defined for testing, re-enable when done developing
+    std::cout << filename << std::endl; // To visually simualte typing a filename. Delete when done
 
     std::cout << std::endl;
     
@@ -71,14 +75,15 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         exit(0); // Currently just exits the program, maybe change later to keep the rpogram running
     }
     
-    if(Reader::read_header(filename)) std::cout << "WAV successfully file identified." << std::endl;
+    if(Reader::read_header(filename)) std::cout << "WAV successfully file identified.\n" << std::endl;
     else
     {
-        std::cout << "This is not a WAV file." << std::endl;
+        std::cout << "There was an error identifying the filetype." << std::endl;
         exit(0); // Currently just exits the program, maybe change later to keep the rpogram running
     }
     
     //[function to open file, store its contents in memory, then close it]
+    Wav* audiofile = new Wav(filename);
 
     //printMetaData();
 
@@ -116,21 +121,3 @@ void printMetaData(const wav_header *header){
     std::cout << "Bit Depth: " << header->bit_depth << std::endl;
 
 }
-
-
-/*
-const int NUM_ARGS = 2;
-
-/**
- * Main program entry point.
- * @param argc: number of arguments given
- * @param argv: value of arguments (array)
- * @return
- * 
-int main(int argc, char const *argv[]) {
-
-
-    
-
-}
-*/
