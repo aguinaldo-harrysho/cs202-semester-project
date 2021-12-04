@@ -9,6 +9,7 @@ void printStartMenu();
 void printProcessorMenu();
 void handleMenu1();
 void printMetaData(wav_header header);
+void processAudio(int type);
 
 int main(){
     
@@ -30,7 +31,6 @@ int main(){
             case 1:
                 
                 handleMenu1();
-                input = 0;
                 break;
 
             case 0:
@@ -107,17 +107,17 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         std::cin >> input;
 
         switch(input){
-
+            
             case 1:
-
+                processAudio(1);
                 input = 0;
                 break;
             case 2:
-
+                processAudio(2);
                 input = 0;
                 break;
             case 3:
-
+                processAudio(3);
                 input = 0;
                 break;
             case 0:
@@ -127,6 +127,29 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
                 std::cout << "Please select an option from the menu\n" << std::endl;
 
         }
+    }
+}
+
+void processAudio(int type)
+{   
+    char filename[1024];
+    std::cout << "Please specify a name for output audio file: ";
+    std::cin >> filename;
+
+    switch(type)
+    {
+        case 1:
+            //Echo echo;
+            //echo.process(data, filename);
+            break;
+        case 2:
+            //Gain gain;
+            //gain.process(data, filename);
+            break;
+        case 3:
+            //Normalizer normalizer;
+            //normalizer.process(data, filename);
+            break;
     }
 }
 
