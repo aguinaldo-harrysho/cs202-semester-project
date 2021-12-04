@@ -145,15 +145,15 @@ void processAudio(int type)
     {
         case 1:
             //Echo echo;
-            //echo.process(data, filename);
+            //echo.process(data);
             break;
         case 2:
             //Gain gain;
-            //gain.process(data, filename);
+            //gain.process(data);
             break;
         case 3:
             //Normalizer normalizer;
-            //normalizer.process(data, filename);
+            //normalizer.process(data);
             break;
     }
 }
