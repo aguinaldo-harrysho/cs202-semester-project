@@ -112,19 +112,16 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         std::cin >> input;
 
         switch(input){
-
+            
             case 1:
-
                 processAudio(1);
                 input = 0;
                 break;
             case 2:
-
                 processAudio(2);
                 input = 0;
                 break;
             case 3:
-
                 processAudio(3);
                 input = 0;
                 break;
