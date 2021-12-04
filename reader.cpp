@@ -31,6 +31,7 @@ wav_header Reader::read_header(const std::string filename){
     myfile.read((char*) &header.data_bytes, 4); // Number of bytes in the data, NumSamples * NumChannels * BitsPerSample/8
     // The actual sound data would be beyond this but we don't need it for the purpose of validation
 
+    myfile.close();
     return header;
     
 }

@@ -1,7 +1,8 @@
 # cs202-semester-project
 
 ### TODO:
-After passing a file through the Reader class, pass the filename to the actual Wav reader (header and body)
+wav_body.h, a struct that holds data for the actual audio in vectors. Will likely extend wav_header.
+
 
 ### Responsibilites:
 Driver & Metadata - Alexander P

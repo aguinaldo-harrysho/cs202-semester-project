@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "wave_header.h"
+#include "wave_body.h"
 #include "reader.h"
 #include "wav.h"
 
@@ -9,6 +11,7 @@ void printStartMenu();
 void printProcessorMenu();
 void handleMenu1();
 void printMetaData(wav_header header);
+void processAudio(int type);
 
 int main(){
     
@@ -30,7 +33,6 @@ int main(){
             case 1:
                 
                 handleMenu1();
-                input = 0;
                 break;
 
             case 0:
@@ -98,7 +100,10 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     std::cout << std::endl;
 
     //[function to open file, store its contents in memory, then close it]
-    Wav* audiofile = new Wav(filename);    
+    wav_body audiofile_body = Wav::readBodyData(audiofile_body, filename);
+    // At this point in the program you now have audiofile_body which contains a vector of ints represtning each byte of a single channel.
+    // That vector is monoChannel_sounData. Access is using audiofile_body.monoChannel_sounData.at(i)
+    // Presumbably you would pass a wav_body object to whatever calss your using for your effects. In the end there will be two vectors, the second one caled steroChannel_soundData;
 
     while(input!=0){
 
@@ -110,14 +115,17 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
 
             case 1:
 
+                processAudio(1);
                 input = 0;
                 break;
             case 2:
 
+                processAudio(2);
                 input = 0;
                 break;
             case 3:
 
+                processAudio(3);
                 input = 0;
                 break;
             case 0:
@@ -127,6 +135,29 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
                 std::cout << "Please select an option from the menu\n" << std::endl;
 
         }
+    }
+}
+
+void processAudio(int type)
+{   
+    char filename[1024];
+    std::cout << "Please specify a name for output audio file: ";
+    std::cin >> filename;
+
+    switch(type)
+    {
+        case 1:
+            //Echo echo;
+            //echo.process(data, filename);
+            break;
+        case 2:
+            //Gain gain;
+            //gain.process(data, filename);
+            break;
+        case 3:
+            //Normalizer normalizer;
+            //normalizer.process(data, filename);
+            break;
     }
 }
 
