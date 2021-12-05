@@ -4,7 +4,7 @@
 
 #include "gain.h"
 
-std::vector<int> Gain::process(std::vector<int> data)
+std::vector<float> Gain::process(std::vector<float> data)
 {   
     float scale;
 
