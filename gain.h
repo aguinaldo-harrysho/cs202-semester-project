@@ -5,5 +5,5 @@
 class Gain
 {
     public:
-    std::vector<int> process(std::vector<int>);
+    std::vector<float> process(std::vector<float>);
 };
