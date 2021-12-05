@@ -15,27 +15,23 @@ void processAudio(int type);
 
 int main(){
     
-    int input = 1;
+    char menuChoice = '1';
 
-    char filename[64];
-
-    while (input!=0) {
+    while (menuChoice!='0') {
 
         printStartMenu();
 
-        std::cin >> input;
+        std::cin >> menuChoice;
         //input = 1; // Disabled input for testing, re-enable when done developing
         //std::cout << "1" << std::endl; // To visually simualte selecting "1". Delete when done
         std::cout << std::endl;
 
-        switch(input){
+        switch(menuChoice){
 
-            case 1:
-                
+            case '1':
                 handleMenu1();
                 break;
-
-            case 0:
+            case '0':
                 exit(1);
                 break;
             default:
@@ -66,7 +62,7 @@ void printProcessorMenu(){
 void handleMenu1(){//Executes when user chooses option 1 from main menu
 
     std::string filename;
-    int input = 1;
+    char menuChoice = '1';
 
     std::cout << "Please enter a .wav filename: " << std::endl;
     //std::cin >> filename;
@@ -105,28 +101,28 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     // That vector is monoChannel_sounData. Access is using audiofile_body.monoChannel_sounData.at(i)
     // Presumbably you would pass a wav_body object to whatever calss your using for your effects. In the end there will be two vectors, the second one caled steroChannel_soundData;
 
-    while(input!=0){
+    while(menuChoice!='0'){
 
         printProcessorMenu();
 
-        std::cin >> input;
+        std::cin >> menuChoice;
 
-        switch(input){
+        switch(menuChoice){
             
-            case 1:
+            case '1':
                 processAudio(1);
-                input = 0;
+                menuChoice = '0';
                 break;
-            case 2:
+            case '2':
                 processAudio(2);
-                input = 0;
+                menuChoice = '0';
                 break;
-            case 3:
+            case '3':
                 processAudio(3);
-                input = 0;
+                menuChoice = '0';
                 break;
-            case 0:
-                input = 0;
+            case '0':
+                menuChoice = '0';
                 break;
             default:
                 std::cout << "Please select an option from the menu\n" << std::endl;
