@@ -23,7 +23,7 @@ Gain Adjustment -
         - Display error message and goto start ✔️
    3. Otherwise ✔️
       - Read file metadata ✔️
-      - Read file audio data ❌
+      - Read file audio data ✔️
    4. Display metadata to user * ✔️
       - Present user with processor menu ✔️
       - If user selects processor option

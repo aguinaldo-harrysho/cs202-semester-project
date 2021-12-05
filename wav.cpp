@@ -35,44 +35,84 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
     audiofile_body = combineHeaderAndBody(audiofile_header, audiofile_body);
 
-    if(audiofile_body.num_channels == 1)
+    if(audiofile_body.num_channels == 1) // Mono channel
     {
+        audiofile_body.bytes.resize(bodySize);
+        unsigned char buffer[bodySize];
 
-    }
-    else
-    {
-
-    }
-
-    audiofile_body.bytes.resize(bodySize);
-    unsigned char buffer[bodySize];
-
-    std::ifstream myfile(filename, std::ios::binary | std::ios::in);
-    if(myfile.is_open())
-    {
-        //std::cout << "Before header read" << std::endl;
-        myfile.read((char*) &audiofile_header, headerSize);
-        //std::cout << "Before body read" << std::endl;
-        myfile.read((char*) &buffer, bodySize);
-        //std::cout << "After body read" << std::endl;
-    }
-    
-    for(int i = 0; i < bodySize; i++)
-    {
-        int intbin = buffer[i];
-        audiofile_body.monoChannel_sounData.push_back(buffer[i]);
-        
-        /*Test Prinout
-        std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
-        if((i-3) % 8 == 0)
+        std::ifstream myfile(filename, std::ios::binary | std::ios::in);
+        if(myfile.is_open())
         {
-            if((i-3) % 16 == 0)
+            //std::cout << "Before header read" << std::endl;
+            myfile.read((char*) &audiofile_header, headerSize);
+            //std::cout << "Before body read" << std::endl;
+            myfile.read((char*) &buffer, bodySize);
+            //std::cout << "After body read" << std::endl;
+        }
+        
+        for(int i = 0; i < bodySize; i++)
+        {
+            int intbin = buffer[i];
+            audiofile_body.monoChannel_sounData.push_back(buffer[i]);
+            
+            /*Test Prinout
+            std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
+            if((i-3) % 8 == 0)
             {
-                std::cout << std::endl;
+                if((i-3) % 16 == 0)
+                {
+                    std::cout << std::endl;
+                }
+                else std::cout << "| ";
+            }*/
+        }
+
+        return audiofile_body;
+    }
+    else // Stero Channel. This will break horribly if we ever get a WAV that is more than 2 channels
+    {
+        //Left Channel, then right channel. Alternating sequentially.
+        audiofile_body.bytes.resize(bodySize); // If it's stero then we should have an even number of samples
+        unsigned char bufferMono[bodySize/2];
+        unsigned char bufferStereo[bodySize/2];
+
+        std::ifstream myfile(filename, std::ios::binary | std::ios::in);
+        if(myfile.is_open())
+        {
+            //std::cout << "Before header read" << std::endl;
+            myfile.read((char*) &audiofile_header, headerSize);
+            //std::cout << "Before body read" << std::endl;
+            for(int i = 0; i < bodySize; i++) // Both buffers take turns reading a sample until the end of the data.
+            {
+                myfile.read((char*) &bufferMono, 1);
+                myfile.read((char*) &bufferStereo, 1);
             }
-            else std::cout << "| ";
-        }*/
+            //std::cout << "After body read" << std::endl;
+        }
+        
+        for(int i = 0; i < bodySize/2; i++)
+        {
+            int intbin = bufferMono[i];
+            audiofile_body.monoChannel_sounData.push_back(bufferMono[i]);
+            /*Test Prinout
+            std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
+            if((i-3) % 8 == 0)
+            {
+                if((i-3) % 16 == 0)
+                {
+                    std::cout << std::endl;
+                }
+                else std::cout << "| ";
+            }*/
+        }
+        for(int i = 0; i < bodySize/2; i++)
+        {
+            int intbin = bufferStereo[i];
+            audiofile_body.monoChannel_sounData.push_back(bufferStereo[i]);
+        }
+
+        return audiofile_body;
     }
 
-    return audiofile_body;
+    
 }
