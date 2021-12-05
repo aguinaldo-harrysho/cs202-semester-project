@@ -31,6 +31,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 6;
     int bodySize = audiofile_header.wav_size - (headerSize - 8);
 
+    
+
     audiofile_body = combineHeaderAndBody(audiofile_header, audiofile_body);
 
     if(audiofile_body.num_channels == 1)
@@ -39,7 +41,7 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     }
     else
     {
-        
+
     }
 
     audiofile_body.bytes.resize(bodySize);

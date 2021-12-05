@@ -96,7 +96,7 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     std::cout << std::endl;
 
     //[function to open file, store its contents in memory, then close it]
-    wav_body audiofile_body = Wav::readBodyData(audiofile_body, filename);
+    wav_body audiofile_body = Wav::readBodyData(audiofile_header, filename);
     // At this point in the program you now have audiofile_body which contains a vector of ints represtning each byte of a single channel.
     // That vector is monoChannel_sounData. Access is using audiofile_body.monoChannel_sounData.at(i)
     // Presumbably you would pass a wav_body object to whatever calss your using for your effects. In the end there will be two vectors, the second one caled steroChannel_soundData;
