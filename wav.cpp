@@ -28,7 +28,7 @@ wav_body Wav::combineHeaderAndBody(wav_header audiofile_header, wav_body audiofi
 wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 {
     wav_body audiofile_body;
-    int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 6;
+    int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
     int bodySize = audiofile_header.wav_size - (headerSize - 8);
 
     
@@ -37,7 +37,7 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
     if(audiofile_body.num_channels == 1) // Mono channel
     {
-        audiofile_body.bytes.resize(bodySize);
+        //audiofile_body.bytes.resize(bodySize);
         unsigned char buffer[bodySize];
 
         std::ifstream myfile(filename, std::ios::binary | std::ios::in);
@@ -55,16 +55,16 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             int intbin = buffer[i];
             audiofile_body.monoChannel_sounData.push_back(buffer[i]);
             
-            /*Test Prinout
-            std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
-            if((i-3) % 8 == 0)
-            {
-                if((i-3) % 16 == 0)
-                {
-                    std::cout << std::endl;
-                }
-                else std::cout << "| ";
-            }*/
+            //Test Prinout
+            // std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
+            // if((i-3) % 8 == 0)
+            // {
+            //     if((i-3) % 16 == 0)
+            //     {
+            //         std::cout << std::endl;
+            //     }
+            //     else std::cout << "| ";
+            // }
         }
 
         return audiofile_body;
@@ -90,11 +90,11 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             //std::cout << "After body read" << std::endl;
         }
         
-        for(int i = 0; i < bodySize/2; i++)
+        for(int i = 0; i < (bodySize/2)-155000; i++)
         {
             int intbin = bufferMono[i];
             audiofile_body.monoChannel_sounData.push_back(bufferMono[i]);
-            /*Test Prinout
+            //Test Prinout
             std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
             if((i-3) % 8 == 0)
             {
@@ -103,9 +103,9 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                     std::cout << std::endl;
                 }
                 else std::cout << "| ";
-            }*/
+            }
         }
-        for(int i = 0; i < bodySize/2; i++)
+        for(int i = 0; i < (bodySize/2); i++)
         {
             int intbin = bufferStereo[i];
             audiofile_body.monoChannel_sounData.push_back(bufferStereo[i]);
