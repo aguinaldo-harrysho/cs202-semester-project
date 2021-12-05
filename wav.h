@@ -10,7 +10,8 @@
 
 class Wav {
 public:
-    static wav_body readBodyData(wav_header, std::string); 
+    static wav_body readBodyData(wav_header, std::string);
+    static void writeAudiofile(wav_body); //Save a wav_body as an actual playable wav file
 };
  
 #endif
