@@ -108,7 +108,7 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     }
 
     //Test Prinout
-    /*
+    
     for(int i = 0; i < headerSize; i++)
     {
         int intbin = headerBuffer[i];
@@ -124,7 +124,7 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     }
     for(int i = 0; i < 68; i++)
     {
-        int intbin = buffer[i];
+        int intbin = audiofile_body.monoChannel_sounData.at(i);
         std::cout <<  std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
         if((i-3) % 8 == 0)
         {
@@ -135,6 +135,6 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             else std::cout << "| ";
         }
     }
-    */
+    
     return audiofile_body;
 }
