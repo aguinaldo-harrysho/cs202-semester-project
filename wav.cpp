@@ -25,180 +25,116 @@ wav_body Wav::combineHeaderAndBody(wav_header audiofile_header, wav_body audiofi
     return audiofile_body;
 }
 
+//Taking in the already created wav_header and the filename, this function reads the data of the wav file, saving it to a wav_body in one or two flotas depending on number of channels.
 wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 {
-    wav_body audiofile_body;
+    wav_body audiofile_body; // Where the body data will be saved. audiofile_header's data will also be copied to here.
+
     int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
-    int bodySize = audiofile_header.wav_size - (headerSize - 8);
+    int bodySize = audiofile_header.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
+
     unsigned char headerBuffer[headerSize]; // Used to hold header data, not neccessary but useful for debugging when printed out later
+    unsigned char buffer[bodySize]; // Will hold the body data.
+    
 
-    audiofile_body = combineHeaderAndBody(audiofile_header, audiofile_body);
-    //std::cout << audiofile_body.bit_depth << std::endl;
-
-    if(audiofile_body.bit_depth == 8){
-        // Read the Data
-        if(audiofile_body.num_channels == 1)
-        {
-
-        }
-        else// Stero Mode
-        {
-
-        }
-    }
-    else// For Bit Depth of 16. If we ever get a file that has a differnt bit dpeth this will break spectacularly.
+    audiofile_body = combineHeaderAndBody(audiofile_header, audiofile_body); //Combine the data in audiofile_header into audiofile_body so we can just use that to get all data about a WAV
+    
+    
+    std::ifstream myfile(filename, std::ios::binary | std::ios::in); // Open file in binary mode
+    if(myfile.is_open())
     {
-        // Read the Data
-        if(audiofile_body.num_channels == 1)
-        {
-
-        }
-        else// Stero Mode
-        {
-
-        }
+        myfile.read((char*) &headerBuffer, headerSize); // Read in the header. While saved, it's not useful except for debugging.
+        myfile.read((char*) &buffer, bodySize); // Read in each byte of body data into an unisgned char.
     }
 
-    // This code will be delete as I redo the implementation
-    if(true) // Mono channel
+
+    int sampleAmount = 0;
+    if(audiofile_body.bit_depth == 8) sampleAmount = bodySize;
+    else sampleAmount = bodySize/2;
+    unsigned int sampleBuffer[sampleAmount];
+
+    int intbin; // buffer values will be saved here to convert them to an int.
+
+    // Distinguish each byte.
+    if(audiofile_body.bit_depth == 8)
     {
-        //audiofile_body.bytes.resize(bodySize);
-
-        if(true) // Bit depth 8. Each byte represents a sample
-        {
-            unsigned char buffer[bodySize];
-
-            std::ifstream myfile(filename, std::ios::binary | std::ios::in);
-            if(myfile.is_open())
-            {
-                //std::cout << "Before header read" << std::endl;
-                myfile.read((char*) &headerBuffer, headerSize);
-                //std::cout << "Before body read" << std::endl;
-                myfile.read((char*) &buffer, bodySize);
-                //std::cout << "After body read" << std::endl;
-            }
-            
-            for(int i = 0; i < bodySize; i++)
-            {
-                    int intbin = buffer[i];
-                    audiofile_body.monoChannel_sounData.push_back(buffer[i]);
-            }
-            //Test Prinout
-            for(int i = 0; i < headerSize; i++)
-            {
-                int intbin = headerBuffer[i];
-                std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " ";
-                if( (i+1) % 8 == 0)
-                {
-                    if( (i+1) % 16 == 0)
-                    {
-                        std::cout << std::endl;
-                    }
-                    else std::cout << "| ";
-                }
-            }
-            for(int i = 0; i < 68; i++)
-            {
-                int intbin = buffer[i];
-                std::cout <<  std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
-                if((i-3) % 8 == 0)
-                {
-                    if((i-3) % 16 == 0)
-                    {
-                        std::cout << std::endl;
-                    }
-                    else std::cout << "| ";
-                }
-            }
-
-        }
-        else // 16 bit depth
-        {
-
-        }
-        
-        
-    }
-    else // Stero Channel. This will break horribly if we ever get a WAV that is more than 2 channels
-    {
-        //Left Channel, then right channel. Alternating sequentially.
-        unsigned char buffer[bodySize]; // If it's stero then we should have an even number of samples
-        unsigned char bufferMono[bodySize/2];
-        unsigned char bufferStereo[bodySize/2];
-
-        std::ifstream myfile(filename, std::ios::binary | std::ios::in);
-        if(myfile.is_open())
-        {
-            //std::cout << "Before header read" << std::endl;
-            myfile.read((char*) &headerBuffer, headerSize);
-            //std::cout << "Before body read" << std::endl;
-            for(int i = 0; i < bodySize; i++) // Both buffers take turns reading a sample until the end of the data.
-            {
-                myfile.read((char*) &buffer, bodySize);
-                // myfile.read((char*) &bufferMono, 1);
-                // myfile.read((char*) &bufferStereo, 1);
-            }
-        }
-
         for(int i = 0; i < bodySize; i++)
         {
-            int intbin = buffer[i];
-            if((i+1) % 2 == 1)
-            {
-                audiofile_body.monoChannel_sounData.push_back(buffer[i]);
-            }
-            else
-            {
-                audiofile_body.steroChannel_soundData.push_back(buffer[i]);
-            }
+                intbin = buffer[i]; // Convert to int to later save to float vector.
+                sampleBuffer[i] = intbin;
         }
+
+    }
+    else if(audiofile_body.bit_depth == 16) // Program will either do nothing or break if we ever get a bit depth that isn't 8 or 16.
+    {
         
-        /*
-        for(int i = 0; i < (bodySize/2); i++)
+        int position = -1;
+        for(int i = 0; i < sampleAmount; i++) //0,2,4,6
         {
-            int intbin = bufferMono[i];
-            audiofile_body.monoChannel_sounData.push_back(bufferMono[i]);
+            position++;
+            intbin = buffer[position] + buffer[position+1];
+            position++;
+            sampleBuffer[i] = intbin; //0,1,2,3
         }
-
-        for(int i = 0; i < (bodySize/2); i++)
-        {
-            int intbin = bufferStereo[i];
-            audiofile_body.steroChannel_soundData.push_back(bufferStereo[i]);
-        }
-        */
-        for(int i = 0; i < headerSize; i++)
-        {
-            //int intbin
-        }
-
-        // for(int i = 0; i < 74; i++)
-        // {
-        //     std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
-        //     std::cout << audiofile_body.steroChannel_soundData.at(i) << " ";
-
-        //     if( ((i-1)*2) % 8 == 0)
-        //     {
-        //         if( ((i-1)*2) % 16 == 0)
-        //         {
-        //             std::cout << std::endl;
-        //         }
-        //         else std::cout << "| ";
-        //     }
-            
-        //     // if(((i*2)-3) % 8 == 0)
-        //     // {
-        //     //     if(((i)-3) % 16 == 0)
-        //     //     {
-        //     //         std::cout << std::endl;
-        //     //     }
-        //     //     else std::cout << "| ";
-        //     // }
-        // }
-
-        std::cout << std::endl;
-
         
     }
+    //std::cout << "I made it here" << std::endl;
+    if(audiofile_body.num_channels == 1) // Mono
+    {
+        //std::cout << "I made it here" << std::endl;
+        for(int i = 0; i < sampleAmount; i ++) audiofile_body.monoChannel_sounData.push_back(sampleBuffer[i]); // Save to float vector.
+        
+    }
+    else if(audiofile_body.num_channels == 2) // Stero
+    {
+        int channelLength = sampleAmount/2; 
+        unsigned char bufferMono[channelLength]; // In stero, the size of these buffers should be half the amount of samples.
+        unsigned char bufferStereo[channelLength];
+        int position = -1;
+        //std::cout << "I made it here" << std::endl;
+        for(int i = 0; i < channelLength; i++)
+        {
+            position++;
+            bufferMono[i] = sampleBuffer[position]; // First sample saved to mono channel
+            position++;
+            bufferStereo[i] = sampleBuffer[position]; // Second sample saved to stero channel
+        }
+        //std::cout << "I made it here" << std::endl;
+        for(int i = 0; i < channelLength; i++)
+        {
+            audiofile_body.monoChannel_sounData.push_back(bufferMono[i]);
+            audiofile_body.steroChannel_soundData.push_back(bufferStereo[i]);
+        }
+    }
 
+    //Test Prinout
+    /*
+    for(int i = 0; i < headerSize; i++)
+    {
+        int intbin = headerBuffer[i];
+        std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " ";
+        if( (i+1) % 8 == 0)
+        {
+            if( (i+1) % 16 == 0)
+            {
+                std::cout << std::endl;
+            }
+            else std::cout << "| ";
+        }
+    }
+    for(int i = 0; i < 68; i++)
+    {
+        int intbin = buffer[i];
+        std::cout <<  std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
+        if((i-3) % 8 == 0)
+        {
+            if((i-3) % 16 == 0)
+            {
+                std::cout << std::endl;
+            }
+            else std::cout << "| ";
+        }
+    }
+    */
     return audiofile_body;
 }
