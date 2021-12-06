@@ -35,14 +35,16 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     audiofile_body = combineHeaderAndBody(audiofile_header, audiofile_body);
     //std::cout << audiofile_body.bit_depth << std::endl;
 
-    if(audiofile_body.bit_depth == 8)
-    {
+    if(audiofile_body.bit_depth == 8){
         // Read the Data
         if(audiofile_body.num_channels == 1)
         {
 
         }
         else// Stero Mode
+        {
+
+        }
     }
     else// For Bit Depth of 16. If we ever get a file that has a differnt bit dpeth this will break spectacularly.
     {
@@ -52,14 +54,17 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
         }
         else// Stero Mode
+        {
+
+        }
     }
 
     // This code will be delete as I redo the implementation
-    if(audiofile_body.num_channels == 1) // Mono channel
+    if(true) // Mono channel
     {
         //audiofile_body.bytes.resize(bodySize);
 
-        if(audiofile_body.bit_depth == 8) // Bit depth 8. Each byte represents a sample
+        if(true) // Bit depth 8. Each byte represents a sample
         {
             unsigned char buffer[bodySize];
 
@@ -75,15 +80,14 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             
             for(int i = 0; i < bodySize; i++)
             {
-                    int intbin = buffer[i] + buffer[i+1];
-                    i++;
+                    int intbin = buffer[i];
                     audiofile_body.monoChannel_sounData.push_back(buffer[i]);
             }
             //Test Prinout
             for(int i = 0; i < headerSize; i++)
             {
                 int intbin = headerBuffer[i];
-                std::cout << intbin << " ";
+                std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " ";
                 if( (i+1) % 8 == 0)
                 {
                     if( (i+1) % 16 == 0)
@@ -95,7 +99,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             }
             for(int i = 0; i < 68; i++)
             {
-                std::cout << audiofile_body.monoChannel_sounData.at(i) << " ";
+                int intbin = buffer[i];
+                std::cout <<  std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
                 if((i-3) % 8 == 0)
                 {
                     if((i-3) % 16 == 0)
@@ -106,7 +111,6 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                 }
             }
 
-            return audiofile_body;
         }
         else // 16 bit depth
         {
@@ -193,8 +197,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
         std::cout << std::endl;
 
-        return audiofile_body;
+        
     }
 
-    
+    return audiofile_body;
 }
