@@ -4,5 +4,6 @@ wavprocessor
 *.vscode
 # ignore all object files since they are temporary
 *.o
+# ignore any example files created/used.
 *.txt
-example.wav
+*.wav
