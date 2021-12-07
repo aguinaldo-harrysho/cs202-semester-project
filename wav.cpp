@@ -6,7 +6,14 @@
 #include "wav.h"
 #include "wave_body.h"
 
-wav_body Wav::combineHeaderAndBody(wav_header audiofile_header, wav_body audiofile_body){
+/**
+ * @brief Combines data from audiofile_header into audiofile_body so that the data can be used easier
+ * 
+ * @param audiofile_header struct that only holds data fro the header of a WAV file
+ * @param audiofile_body struct that holds both header data and body data
+ * @return wav_body 
+ */
+combineHeaderAndBody(wav_header audiofile_header, wav_body audiofile_body){
     // For loops are for atrributes that are arrays
     for(int i = 0; i < 4; i++) audiofile_body.riff_header[i] = audiofile_header.riff_header[i]; // char riff_header[4]
     audiofile_body.wav_size = audiofile_header.wav_size; // int wav_size
@@ -230,10 +237,10 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     else int sampleAmount = bodySize/2;
 
     int newSize = audiofile_body.monoChannel_sounData.size();
-    //myfile.read((char*) &headerBuffer, headerSize);
 
+    //Header writing code, bit_depth and num_channels don't matter for this. wav_size and data_btes need to be modified if an effect like echo made the vector longer.
     myfile.write(audiofile_body.riff_header, 4);
-    myfile.write((char*) &audiofile_body.wav_size, 4);
+    myfile.write((char*) &audiofile_body.wav_size, 4); // Change as needed
     myfile.write(audiofile_body.wave_header, 4);
     myfile.write(audiofile_body.fmt_header, 4);
     myfile.write((char*) &audiofile_body.fmt_chunk_size, 4);
@@ -244,22 +251,9 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     myfile.write((char*) &audiofile_body.sample_alignment, 2);
     myfile.write((char*) &audiofile_body.bit_depth, 2);
     myfile.write(audiofile_body.data_header, 4);
-    myfile.write((char*) &audiofile_body.data_bytes, 4);
+    myfile.write((char*) &audiofile_body.data_bytes, 4); // Change as needed
 
-    //Header writing code, bit_depth and num_channels don't matter for this. wav_size and data_btes need to be modified if an effect like echo made the vector longer.
-    //for(int i = 0; i < 4; i++) myfile << audiofile_body.riff_header[i];
-    //myfile << audiofile_body.wav_size; // int wav_size
-    // for(int i = 0; i < 4; i++) myfile << audiofile_body.wave_header[i];
-    // for(int i = 0; i < 4; i++) myfile << audiofile_body.fmt_header[i];
-    // myfile << audiofile_body.fmt_chunk_size;
-    // myfile << audiofile_body.audio_format;
-    // myfile << audiofile_body.num_channels;
-    // myfile << audiofile_body.sample_rate;
-    // myfile << audiofile_body.byte_rate;
-    // myfile << audiofile_body.sample_alignment;
-    // myfile << audiofile_body.bit_depth;
-    // for(int i = 0; i < 4; i++) myfile << audiofile_body.data_header[i];
-    //myfile << audiofile_body.data_bytes; // int data_bytes
+    //Header writing seems to work flawlessly but the body writing is having issues. Possible has something to with how it's converted when writen.
     
     if(audiofile_body.num_channels == 1)
     {
