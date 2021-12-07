@@ -5,3 +5,4 @@ wavprocessor
 # ignore all object files since they are temporary
 *.o
 *.txt
+example.wav
