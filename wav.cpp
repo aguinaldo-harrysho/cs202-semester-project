@@ -53,11 +53,12 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     else sampleAmount = bodySize/2;
     unsigned int sampleBuffer[sampleAmount];
 
-    int intbin; // buffer values will be saved here to convert them to an int.
-
+    
     // Distinguish each byte.
     if(audiofile_body.bit_depth == 8)
     {
+        int intbin; // buffer values will be saved here to convert them to an int.
+
         for(int i = 0; i < bodySize; i++)
         {
                 intbin = buffer[i]; // Convert to int to later save to float vector.
@@ -67,7 +68,9 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     }
     else if(audiofile_body.bit_depth == 16) // Program will either do nothing or break if we ever get a bit depth that isn't 8 or 16.
     {
-        
+        unsigned int intbin; // buffer values will be saved here to convert them to an int.
+        std::bitset<16> foo;
+
         int position = -1;
         for(int i = 0; i < sampleAmount; i++) //0,2,4,6
         {
@@ -109,10 +112,10 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
     //Test Prinout
     
-    for(int i = 0; i < headerSize; i++)
+    for(int i = 0; i < 0; i++)
     {
         int intbin = headerBuffer[i];
-        std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " ";
+        std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
         if( (i+1) % 8 == 0)
         {
             if( (i+1) % 16 == 0)
@@ -122,10 +125,11 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             else std::cout << "| ";
         }
     }
-    for(int i = 0; i < 68; i++)
+    for(int i = 80; i < 84; i++)
     {
-        int intbin = audiofile_body.monoChannel_sounData.at(i);
-        std::cout <<  std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
+        int intbin = buffer[i];
+        //int intbin = audiofile_body.monoChannel_sounData.at(i);
+        std::cout <<  std::setfill ('0') << std::setw(2)<< intbin << " " << std::dec;
         if((i-3) % 8 == 0)
         {
             if((i-3) % 16 == 0)
