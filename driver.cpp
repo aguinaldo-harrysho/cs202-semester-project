@@ -6,6 +6,9 @@
 #include "wave_body.h"
 #include "reader.h"
 #include "wav.h"
+#include "echo.h"
+#include "gain.h"
+#include "normalizer.h"
 
 void printStartMenu();
 void printProcessorMenu();

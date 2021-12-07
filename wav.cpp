@@ -13,7 +13,7 @@
  * @param audiofile_body struct that holds both header data and body data
  * @return wav_body 
  */
-combineHeaderAndBody(wav_header audiofile_header, wav_body audiofile_body){
+wav_body Wav::combineHeaderAndBody(wav_header audiofile_header, wav_body audiofile_body){
     // For loops are for atrributes that are arrays
     for(int i = 0; i < 4; i++) audiofile_body.riff_header[i] = audiofile_header.riff_header[i]; // char riff_header[4]
     audiofile_body.wav_size = audiofile_header.wav_size; // int wav_size
