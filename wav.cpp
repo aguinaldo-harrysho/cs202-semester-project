@@ -209,3 +209,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     
     return audiofile_body;
 }
+
+void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual playable wav file
+{
+    
+}
