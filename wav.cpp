@@ -33,6 +33,10 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
     int bodySize = audiofile_header.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
 
+    std::cout << bodySize << std::endl;
+    std::cout << audiofile_header.data_bytes << std::endl;
+    std::cout << audiofile_header.wav_size << std::endl;
+
     unsigned char headerBuffer[headerSize]; // Used to hold header data, not neccessary but useful for debugging when printed out later
     unsigned char buffer[bodySize]; // Will hold the body data.
     
@@ -224,7 +228,22 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     if(audiofile_body.bit_depth == 8) int sampleAmount = bodySize;
     else int sampleAmount = bodySize/2;
 
-    //Header writing code, bit_depth and num_channels don't matter for this
+    int newSize = audiofile_body.monoChannel_sounData.size();
+
+    //Header writing code, bit_depth and num_channels don't matter for this. wav_size and data_btes need to be modified if an effect like echo made the vector longer.
+    for(int i = 0; i < 4; i++) myfile << audiofile_body.riff_header[i];
+    myfile << audiofile_body.wav_size; // int wav_size
+    for(int i = 0; i < 4; i++) myfile << audiofile_body.wave_header[i];
+    for(int i = 0; i < 4; i++) myfile << audiofile_body.fmt_header[i];
+    myfile << audiofile_body.fmt_chunk_size;
+    myfile << audiofile_body.audio_format;
+    myfile << audiofile_body.num_channels;
+    myfile << audiofile_body.sample_rate;
+    myfile << audiofile_body.byte_rate;
+    myfile << audiofile_body.sample_alignment;
+    myfile << audiofile_body.bit_depth;
+    for(int i = 0; i < 4; i++) myfile << audiofile_body.data_header[i];
+    myfile << audiofile_body.data_bytes; // int data_bytes
 
     if(audiofile_body.num_channels == 1)
     {
