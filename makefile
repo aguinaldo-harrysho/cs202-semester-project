@@ -1,6 +1,6 @@
 all: wavprocessor
 wavprocessor: driver.cpp reader.o wav.o echo.o gain.o normalizer.o
-		g++ -o wavprocessor driver.cpp reader.o wav.o echo.o
+		g++ -o wavprocessor driver.cpp reader.o wav.o echo.o gain.o normalizer.o
 reader.o: reader.cpp reader.h
 		g++ -c reader.cpp
 echo.o: echo.cpp echo.h
