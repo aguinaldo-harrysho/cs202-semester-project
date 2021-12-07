@@ -143,7 +143,6 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                 audiofile_body.monoChannel_sounData.push_back(intbin1);
                 audiofile_body.steroChannel_soundData.push_back(intbin2);
             }
-            std::cout << "I made it here" << std::endl;
             //std::cout << "I made it here" << std::endl;
             // for(int i = 0; i < channelLength; i++)
             // {
@@ -177,48 +176,36 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     }
 
     //Test Prinout
-    
-    for(int i = 0; i < headerSize; i++) //headerSize
-    {
-        int intbin = headerBuffer[i];
-        std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
-        if( (i+1) % 8 == 0)
-        {
-            if( (i+1) % 16 == 0)
-            {
-                std::cout << std::endl;
-            }
-            else std::cout << "| ";
-        }
-    }
-    int position = -1;
-    /*
-    std::cout << sampleBuffer[0] << std::endl;
-    std::cout << sampleBuffer[1] << std::endl;
-    std::cout << sampleBuffer[2] << std::endl;
-    std::cout << sampleBuffer[3] << std::endl;
-    //std::cout << audiofile_body.monoChannel_sounData.at(1) << std::endl;
-    std::cout << std::setfill('0') << std::setw(4) << std::hex << audiofile_body.monoChannel_sounData.at(0) << " " << std::dec << std::endl;
-    std::cout << std::setfill('0') << std::setw(4) << std::hex << audiofile_body.steroChannel_soundData.at(0) << " " << std::dec << std::endl;
-    std::cout << std::setfill('0') << std::setw(4) << std::hex << audiofile_body.monoChannel_sounData.at(1) << " " << std::dec << std::endl;
-    std::cout << std::setfill('0') << std::setw(4) << std::hex << audiofile_body.steroChannel_soundData.at(1) << " " << std::dec << std::endl;
-    */
-    for(int i = 0; i < 68; i++)
-    {
-        //int intbin = buffer[i];
-        int intbin = audiofile_body.monoChannel_sounData.at(i);
-        std::cout << std::setfill('0') << std::setw(4) << std::hex << intbin << " " << std::dec;
-        intbin = audiofile_body.steroChannel_soundData.at(i);
-        std::cout << std::setfill('0') << std::setw(4) << std::hex << intbin << " " << std::dec;
-        if((i) % 2 == 0)
-        {
-            if((i) % 4 == 0)
-            {
-                std::cout << std::endl;
-            }
-            else std::cout << "| ";
-        }
-    }
+    // for(int i = 0; i < headerSize; i++) //headerSize
+    // {
+    //     int intbin = headerBuffer[i];
+    //     std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
+    //     if( (i+1) % 8 == 0)
+    //     {
+    //         if( (i+1) % 16 == 0)
+    //         {
+    //             std::cout << std::endl;
+    //         }
+    //         else std::cout << "| ";
+    //     }
+    // }
+    // int position = -1;
+    // for(int i = 0; i < 68; i++)
+    // {
+    //     //int intbin = buffer[i];
+    //     int intbin = audiofile_body.monoChannel_sounData.at(i);
+    //     std::cout << std::setfill('0') << std::setw(4) << std::hex << intbin << " " << std::dec;
+    //     intbin = audiofile_body.steroChannel_soundData.at(i);
+    //     std::cout << std::setfill('0') << std::setw(4) << std::hex << intbin << " " << std::dec;
+    //     if((i) % 2 == 0)
+    //     {
+    //         if((i) % 4 == 0)
+    //         {
+    //             std::cout << std::endl;
+    //         }
+    //         else std::cout << "| ";
+    //     }
+    // }
     
     return audiofile_body;
 }
