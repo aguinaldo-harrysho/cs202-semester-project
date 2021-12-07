@@ -221,7 +221,7 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     std::string writer;
     
     
-    std::ofstream myfile("example.txt", std::ios::binary);
+    std::ofstream myfile("count8.wav", std::ios::binary);
     //std::ofstream myfile("example.txt", std::ios::binary | std::ios::in);
     //myfile.open();
 
