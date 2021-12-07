@@ -69,14 +69,24 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     else if(audiofile_body.bit_depth == 16) // Program will either do nothing or break if we ever get a bit depth that isn't 8 or 16.
     {
         unsigned int intbin; // buffer values will be saved here to convert them to an int.
-        std::bitset<16> foo;
+        //std::bitset<16> foo;
+        std::bitset<8> test1;
+        std::bitset<8> test2;
 
         int position = -1;
         for(int i = 0; i < sampleAmount; i++) //0,2,4,6
         {
             position++;
-            intbin = buffer[position] + buffer[position+1];
+            test1 = buffer[position];
+            test2 = buffer[position+1];
+            //foo = buffer[position] + buffer[position+1];
+            //std::string tester1 = test1.to_string();
+            //std::string tester2 = test2.to_string();
+            //std::string appender = tester1 + tester2;
+            std::bitset<16> foo(test1.to_string() + test2.to_string());
+            //std::cout << foo << std::endl;
             position++;
+            intbin = (int)(foo.to_ulong());
             sampleBuffer[i] = intbin; //0,1,2,3
         }
         
@@ -112,7 +122,7 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
     //Test Prinout
     
-    for(int i = 0; i < 0; i++)
+    for(int i = 0; i < headerSize; i++)
     {
         int intbin = headerBuffer[i];
         std::cout << std::setfill ('0') << std::setw(2) << std::hex << intbin << " " << std::dec;
@@ -125,14 +135,14 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             else std::cout << "| ";
         }
     }
-    for(int i = 80; i < 84; i++)
+    for(int i = 0; i < 68; i++)
     {
-        int intbin = buffer[i];
-        //int intbin = audiofile_body.monoChannel_sounData.at(i);
-        std::cout <<  std::setfill ('0') << std::setw(2)<< intbin << " " << std::dec;
-        if((i-3) % 8 == 0)
+        //int intbin = buffer[i];
+        int intbin = audiofile_body.monoChannel_sounData.at(i);
+        std::cout <<  std::setfill ('0') << std::setw(4) << std::hex << intbin << " " << std::dec;
+        if((i-1) % 4 == 0)
         {
-            if((i-3) % 16 == 0)
+            if((i-1) % 8 == 0)
             {
                 std::cout << std::endl;
             }
