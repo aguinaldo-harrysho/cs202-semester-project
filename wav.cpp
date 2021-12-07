@@ -260,7 +260,7 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     // myfile << audiofile_body.bit_depth;
     // for(int i = 0; i < 4; i++) myfile << audiofile_body.data_header[i];
     //myfile << audiofile_body.data_bytes; // int data_bytes
-
+    
     if(audiofile_body.num_channels == 1)
     {
         std::cout << "Mono" << std::endl;
