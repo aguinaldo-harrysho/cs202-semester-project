@@ -33,9 +33,9 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
     int bodySize = audiofile_header.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
 
-    std::cout << bodySize << std::endl;
-    std::cout << audiofile_header.data_bytes << std::endl;
-    std::cout << audiofile_header.wav_size << std::endl;
+    // std::cout << bodySize << std::endl;
+    // std::cout << audiofile_header.data_bytes << std::endl;
+    // std::cout << audiofile_header.wav_size << std::endl;
 
     unsigned char headerBuffer[headerSize]; // Used to hold header data, not neccessary but useful for debugging when printed out later
     unsigned char buffer[bodySize]; // Will hold the body data.
@@ -221,29 +221,45 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     std::string writer;
     
     
-    std::ofstream myfile;
-    myfile.open("example.txt");
+    std::ofstream myfile("example.txt", std::ios::binary);
+    //std::ofstream myfile("example.txt", std::ios::binary | std::ios::in);
+    //myfile.open();
 
     int sampleAmount = bodySize;
     if(audiofile_body.bit_depth == 8) int sampleAmount = bodySize;
     else int sampleAmount = bodySize/2;
 
     int newSize = audiofile_body.monoChannel_sounData.size();
+    //myfile.read((char*) &headerBuffer, headerSize);
+
+    myfile.write(audiofile_body.riff_header, 4);
+    myfile.write((char*) &audiofile_body.wav_size, 4);
+    myfile.write(audiofile_body.wave_header, 4);
+    myfile.write(audiofile_body.fmt_header, 4);
+    myfile.write((char*) &audiofile_body.fmt_chunk_size, 4);
+    myfile.write((char*) &audiofile_body.audio_format, 2);
+    myfile.write((char*) &audiofile_body.num_channels, 2);
+    myfile.write((char*) &audiofile_body.sample_rate, 4);
+    myfile.write((char*) &audiofile_body.byte_rate, 4);
+    myfile.write((char*) &audiofile_body.sample_alignment, 2);
+    myfile.write((char*) &audiofile_body.bit_depth, 2);
+    myfile.write(audiofile_body.data_header, 4);
+    myfile.write((char*) &audiofile_body.data_bytes, 4);
 
     //Header writing code, bit_depth and num_channels don't matter for this. wav_size and data_btes need to be modified if an effect like echo made the vector longer.
-    for(int i = 0; i < 4; i++) myfile << audiofile_body.riff_header[i];
-    myfile << audiofile_body.wav_size; // int wav_size
-    for(int i = 0; i < 4; i++) myfile << audiofile_body.wave_header[i];
-    for(int i = 0; i < 4; i++) myfile << audiofile_body.fmt_header[i];
-    myfile << audiofile_body.fmt_chunk_size;
-    myfile << audiofile_body.audio_format;
-    myfile << audiofile_body.num_channels;
-    myfile << audiofile_body.sample_rate;
-    myfile << audiofile_body.byte_rate;
-    myfile << audiofile_body.sample_alignment;
-    myfile << audiofile_body.bit_depth;
-    for(int i = 0; i < 4; i++) myfile << audiofile_body.data_header[i];
-    myfile << audiofile_body.data_bytes; // int data_bytes
+    //for(int i = 0; i < 4; i++) myfile << audiofile_body.riff_header[i];
+    //myfile << audiofile_body.wav_size; // int wav_size
+    // for(int i = 0; i < 4; i++) myfile << audiofile_body.wave_header[i];
+    // for(int i = 0; i < 4; i++) myfile << audiofile_body.fmt_header[i];
+    // myfile << audiofile_body.fmt_chunk_size;
+    // myfile << audiofile_body.audio_format;
+    // myfile << audiofile_body.num_channels;
+    // myfile << audiofile_body.sample_rate;
+    // myfile << audiofile_body.byte_rate;
+    // myfile << audiofile_body.sample_alignment;
+    // myfile << audiofile_body.bit_depth;
+    // for(int i = 0; i < 4; i++) myfile << audiofile_body.data_header[i];
+    //myfile << audiofile_body.data_bytes; // int data_bytes
 
     if(audiofile_body.num_channels == 1)
     {
@@ -254,9 +270,17 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
             unsigned int intbin = audiofile_body.monoChannel_sounData.at(i);
             std::string writer;// = std::bitset<8>(intbin).to_string();
             
-            if(audiofile_body.bit_depth == 8) writer = std::bitset<8>(intbin).to_string();
-            else writer = std::bitset<16>(intbin).to_string();
-            myfile << writer;
+            if(audiofile_body.bit_depth == 8) 
+            {
+                writer = std::bitset<8>(intbin).to_string();
+                myfile.write((char*) &writer, 8);
+            }
+            else 
+            {
+                writer = std::bitset<16>(intbin).to_string();
+                myfile.write((char*) &writer, 16);
+            }
+            
         }
     }
     else
