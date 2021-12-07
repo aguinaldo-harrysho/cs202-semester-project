@@ -6,7 +6,7 @@ class Echo
 {
 
 public:
-	static std::vector<float> process(const std::vector<float>& input, float gain, int delay);
+	std::vector<float> process(std::vector<float> data);
 };
 
 #endif
