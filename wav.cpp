@@ -212,9 +212,64 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
 void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual playable wav file
 {
+    int headerSize = 4 + (8 + audiofile_body.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
+    int bodySize = audiofile_body.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
+    std::string writer;
+    
+    
     std::ofstream myfile;
     myfile.open("example.txt");
-    std::bitset<audiofile_body.bit_depth> writer = audiofile_body.monoChannel_sounData.at(1);
-    myfile << writer;
+
+    int sampleAmount = bodySize;
+    if(audiofile_body.bit_depth == 8) int sampleAmount = bodySize;
+    else int sampleAmount = bodySize/2;
+
+    //Header writing code, bit_depth and num_channels don't matter for this
+
+    if(audiofile_body.num_channels == 1)
+    {
+        std::cout << "Mono" << std::endl;
+
+        for(int i = 0; i < sampleAmount; i++)
+        {
+            unsigned int intbin = audiofile_body.monoChannel_sounData.at(i);
+            std::string writer;// = std::bitset<8>(intbin).to_string();
+            
+            if(audiofile_body.bit_depth == 8) writer = std::bitset<8>(intbin).to_string();
+            else writer = std::bitset<16>(intbin).to_string();
+            myfile << writer;
+        }
+    }
+    else
+    {
+        std::cout << "Stereo" << std::endl;
+        //int positioner = -1;
+        for(int i = 0; i < sampleAmount/2; i++)
+        {
+            //positioner++;
+            unsigned int intbin = audiofile_body.monoChannel_sounData.at(i);
+            unsigned int intbin1 = audiofile_body.steroChannel_soundData.at(i);
+            std::string writer;// = std::bitset<8>(intbin).to_string();
+            std::string writer1;
+            
+            if(audiofile_body.bit_depth == 8)
+            {
+                writer = std::bitset<8>(intbin).to_string();
+                writer1 = std::bitset<8>(intbin1).to_string();
+            }
+            else 
+            {
+                writer = std::bitset<16>(intbin).to_string();
+                writer1 = std::bitset<16>(intbin1).to_string();
+            }
+            myfile << writer << writer1;
+        }
+    }
+    
+    // std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
+    // std::cout << intbin << std::endl;
+    // std::cout << writer << std::endl;
+
+    
     myfile.close();
 }
