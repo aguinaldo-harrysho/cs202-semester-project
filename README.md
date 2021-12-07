@@ -3,14 +3,18 @@
 ### TODO:
 wav_body.h, a struct that holds data for the actual audio in vectors. Will likely extend wav_header.
 
+### Group Members:
+-Alexander P
+-Harry Sho K Aguinaldo
+-Dylan Perkins
+-MistaHouse
 
 ### Responsibilites:
 Driver & Metadata - Alexander P
-UI - Harrumakii
-
+UI - Harry Aguinaldo
 Normalization - MistaHouse
 Echo - Dylan Perkins
-Gain Adjustment - 
+Gain Adjustment - Harry Aguinaldo
 
 
 ## Program Flow:
