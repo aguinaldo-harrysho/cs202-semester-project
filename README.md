@@ -7,7 +7,7 @@ wav_body.h, a struct that holds data for the actual audio in vectors. Will likel
 -Alexander P
 -Harry Sho K Aguinaldo
 -Dylan Perkins
--MistaHouse
+-Kyle House
 
 ### Responsibilites:
 Driver & Metadata - Alexander P
