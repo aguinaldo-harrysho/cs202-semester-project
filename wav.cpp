@@ -212,5 +212,9 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 
 void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual playable wav file
 {
-    
+    std::ofstream myfile;
+    myfile.open("example.txt");
+    std::bitset<audiofile_body.bit_depth> writer = audiofile_body.monoChannel_sounData.at(1);
+    myfile << writer;
+    myfile.close();
 }

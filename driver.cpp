@@ -11,7 +11,7 @@ void printStartMenu();
 void printProcessorMenu();
 void handleMenu1();
 void printMetaData(wav_header header);
-void processAudio(int type);
+void processAudio(int type, wav_body audiofile_body);
 
 int main(){
     
@@ -110,15 +110,15 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         switch(menuChoice){
             
             case '1':
-                processAudio(1);
+                processAudio(1, audiofile_body);
                 menuChoice = '0';
                 break;
             case '2':
-                processAudio(2);
+                processAudio(2, audiofile_body);
                 menuChoice = '0';
                 break;
             case '3':
-                processAudio(3);
+                processAudio(3, audiofile_body);
                 menuChoice = '0';
                 break;
             case '0':
@@ -131,7 +131,7 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     }
 }
 
-void processAudio(int type)
+void processAudio(int type, wav_body audiofile_body)
 {   
     char filename[1024];
     std::cout << "Please specify a name for output audio file: ";
@@ -142,6 +142,7 @@ void processAudio(int type)
         case 1:
             //Echo echo;
             //echo.process(data);
+            Wav::writeAudiofile(audiofile_body);
             break;
         case 2:
             //Gain gain;
