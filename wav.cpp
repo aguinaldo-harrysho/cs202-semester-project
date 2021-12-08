@@ -259,6 +259,17 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     {
         std::cout << "Mono" << std::endl;
 
+        unsigned int tempor = audiofile_body.monoChannel_sounData.at(0);
+        std::cout << std::dec;
+        std::cout << "Unsigned Int: ";
+        std::cout << tempor << std::endl;
+        std::string tempors = std::bitset<8>(tempor).to_string();
+        std::cout << "String: ";
+        std::cout << tempors << std::endl;
+        std::cout << "Char cast: ";
+        std::cout << (char*) &tempor << std::endl;
+
+
         for(int i = 0; i < sampleAmount; i++)
         {
             unsigned int intbin = audiofile_body.monoChannel_sounData.at(i);
@@ -267,12 +278,12 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
             if(audiofile_body.bit_depth == 8) 
             {
                 writer = std::bitset<8>(intbin).to_string();
-                myfile.write((char*) &writer, 8);
+                myfile.write((char*) &intbin, 1);
             }
             else 
             {
                 writer = std::bitset<16>(intbin).to_string();
-                myfile.write((char*) &writer, 16);
+                myfile.write((char*) &writer, 1);
             }
             
         }
