@@ -69,7 +69,7 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
 
     std::cout << "Please enter a .wav filename: " << std::endl;
     //std::cin >> filename;
-    filename = "yes-8-bit-mono.wav"; // Filename explicitly defined for testing, re-enable when done developing
+    filename = "yes-16-bit-mono.wav"; // Filename explicitly defined for testing, re-enable when done developing
     std::cout << filename << std::endl; // To visually simualte typing a filename. Delete when done
 
     std::cout << std::endl;
@@ -148,7 +148,7 @@ void processAudio(int type, wav_body audiofile_body)
             std::cout << "Vector data: ";
             std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
 
-            Wav::writeAudiofile(audiofile_body);
+            Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 2:
             //Gain gain;
