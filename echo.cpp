@@ -1,7 +1,7 @@
 #include <iostream>
 #include "echo.h"
 
-std::vector<float> Echo::process(std::vector<float> data)
+wav_body Echo::process(wav_body audiofile_body)
 {
 	float gain;
 	int delay;
@@ -12,18 +12,18 @@ std::vector<float> Echo::process(std::vector<float> data)
 	std::cout << "Please specify a delay for echo adjustment." << std::endl;
 	std::cin >> delay;
 
-	std::vector<float> output;
-	output.reserve(data.size());
-	for(int i = 0; i < data.size(); i++)
+	//std::vector<float> output;
+	//output.reserve(audiofile_body.monoChannel_sounData.size());
+	for(int i = 0; i < audiofile_body.monoChannel_sounData.size(); i++)
 	{
 		if(i > delay) 
 		{
-			output.push_back(data[i] + gain*output[i - delay]);
+			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData[i] + gain*audiofile_body.monoChannel_sounData[i - delay]);
 		
 		} else{
-			output.push_back(data[i]);
+			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData[i]);
 		}
 	}
 	
-	return output;
+	return audiofile_body;
 }

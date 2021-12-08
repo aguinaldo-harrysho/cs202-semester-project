@@ -153,7 +153,7 @@ void processAudio(int type, wav_body audiofile_body)
     switch(type)
     {
         case 1:
-            Echo::process(audiofile_body.monoChannel_sounData);
+            audiofile_body = Echo::process(audiofile_body);
             Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 2:

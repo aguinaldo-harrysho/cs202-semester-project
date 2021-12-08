@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "wave_header.h"
 
 #ifndef WAVE_BODY_WAVE_BODY_H
 #define WAVE_BODY_WAVE_BODY_H
