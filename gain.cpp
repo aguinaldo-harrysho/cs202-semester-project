@@ -17,5 +17,14 @@ wav_body Gain::process(wav_body audiofile_body)
         audiofile_body.monoChannel_sounData[i] = audiofile_body.monoChannel_sounData[i] * scale;
     }
 
+    if (audiofile_body.num_channels == 2){
+
+        for (int i = 0; i < audiofile_body.monoChannel_sounData.size(); i++)
+        {
+            audiofile_body.steroChannel_soundData[i] = audiofile_body.steroChannel_soundData[i] * scale;
+        }
+
+    }
+
     return audiofile_body;
 }
