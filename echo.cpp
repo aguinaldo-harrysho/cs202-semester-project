@@ -14,8 +14,8 @@ wav_body Echo::process(wav_body audiofile_body)
 
 	//std::vector<float> output;
 	//output.reserve(audiofile_body.monoChannel_sounData.size());
-	std::cout << "After Delay input" << std::endl;
-	std::cout << "Size: " << audiofile_body.monoChannel_sounData.size() << std::endl;
+	//std::cout << "After Delay input" << std::endl;
+	//std::cout << "Size: " << audiofile_body.monoChannel_sounData.size() << std::endl;
 	int stopSize = audiofile_body.monoChannel_sounData.size();
 	for(int i = 0; i < stopSize; i++)
 	{
@@ -26,6 +26,20 @@ wav_body Echo::process(wav_body audiofile_body)
 		
 		} else{
 			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData[i]);
+		}
+	}
+	if(audiofile_body.num_channels == 2)
+	{
+		for(int i = 0; i < stopSize; i++)
+		{
+			//std::cout << i << std::endl;
+			if(i > delay) 
+			{
+				audiofile_body.steroChannel_soundData.push_back(audiofile_body.steroChannel_soundData[i] + gain*audiofile_body.steroChannel_soundData[i - delay]);
+			
+			} else{
+				audiofile_body.steroChannel_soundData.push_back(audiofile_body.steroChannel_soundData[i]);
+			}
 		}
 	}
 	
