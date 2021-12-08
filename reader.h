@@ -5,7 +5,7 @@
 #include <fstream>
 #include "wave_header.h"
 /**
- * This is the Echo class
+ * This is the Reader class
  * 
  */
 class Reader {
