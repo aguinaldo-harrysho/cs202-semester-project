@@ -20,18 +20,18 @@ Two main challenges we encountered during this project were dealing with file re
 The only issue we see is that the echo processor doesn't seem to work. We suspect that this may have to do with managing the length of the file.
 
 ## Program Flow:
-   1. Start: Present start menu ✔️
-      - If user selects quit, exit program ✔️
-   2. Else ✔️
-      - Request filename from user ✔️
-      - Open file specified by filename ✔️
-        - If file does not exist or file is not wav file ✔️
-        - Display error message and goto start ✔️
-   3. Otherwise ✔️
-      - Read file metadata ✔️
-      - Read file audio data ✔️
-   4. Display metadata to user * ✔️
-      - Present user with processor menu ✔️
+   1. Start: Present start menu 
+      - If user selects quit, exit program 
+   2. Else 
+      - Request filename from user 
+      - Open file specified by filename 
+        - If file does not exist or file is not wav file 
+        - Display error message and goto start 
+   3. Otherwise 
+      - Read file metadata 
+      - Read file audio data 
+   4. Display metadata to user 
+      - Present user with processor menu 
       - If user selects processor option
       - Request output filename
       - Run processor
