@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gain_0',['Gain',['../classGain.html',1,'']]]
+  ['echo_0',['Echo',['../classEcho.html',1,'']]]
 ];

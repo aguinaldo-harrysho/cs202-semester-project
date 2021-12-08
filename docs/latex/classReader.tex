@@ -1,23 +1,84 @@
 \hypertarget{classReader}{}\doxysection{Reader Class Reference}
 \label{classReader}\index{Reader@{Reader}}
+
+
+{\ttfamily \#include $<$reader.\+h$>$}
+
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classReader_a8e3f86be76e4dd4ed6152279b7398652}\label{classReader_a8e3f86be76e4dd4ed6152279b7398652}} 
-static bool {\bfseries read\+\_\+file} (const std\+::string)
-\item 
-\mbox{\Hypertarget{classReader_a3ecf6f8cff4852f2609a9ede8bd5af7e}\label{classReader_a3ecf6f8cff4852f2609a9ede8bd5af7e}} 
-static \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} {\bfseries read\+\_\+header} (const std\+::string)
-\item 
-\mbox{\Hypertarget{classReader_afeaa8cf74560159c41321e7e1b954218}\label{classReader_afeaa8cf74560159c41321e7e1b954218}} 
-static bool {\bfseries check\+\_\+header} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}})
-\end{DoxyCompactItemize}
+static bool \mbox{\hyperlink{classReader_a8e3f86be76e4dd4ed6152279b7398652}{read\+\_\+file}} (const std\+::string)
+\begin{DoxyCompactList}\small\item\em Attempts to open the target file. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} \mbox{\hyperlink{classReader_a3ecf6f8cff4852f2609a9ede8bd5af7e}{read\+\_\+header}} (const std\+::string)
+\begin{DoxyCompactList}\small\item\em Reads in the header of filename into a \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classReader_afeaa8cf74560159c41321e7e1b954218}{check\+\_\+header}} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}})
+\begin{DoxyCompactList}\small\item\em Checks to see if the data in the \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object contains data for a WAV file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classReader_a9b21913e6629f9747ba6f95440828a77}\label{classReader_a9b21913e6629f9747ba6f95440828a77}} 
 static \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} {\bfseries header}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the \mbox{\hyperlink{classReader}{Reader}} class 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classReader_afeaa8cf74560159c41321e7e1b954218}\label{classReader_afeaa8cf74560159c41321e7e1b954218}} 
+\index{Reader@{Reader}!check\_header@{check\_header}}
+\index{check\_header@{check\_header}!Reader@{Reader}}
+\doxysubsubsection{\texorpdfstring{check\_header()}{check\_header()}}
+{\footnotesize\ttfamily bool Reader\+::check\+\_\+header (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}}]{header }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks to see if the data in the \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object contains data for a WAV file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & -\/ the \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean -\/ true or false if the data in header is for a WAV file 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReader_a8e3f86be76e4dd4ed6152279b7398652}\label{classReader_a8e3f86be76e4dd4ed6152279b7398652}} 
+\index{Reader@{Reader}!read\_file@{read\_file}}
+\index{read\_file@{read\_file}!Reader@{Reader}}
+\doxysubsubsection{\texorpdfstring{read\_file()}{read\_file()}}
+{\footnotesize\ttfamily bool Reader\+::read\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Attempts to open the target file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & -\/ the name of the target file to open \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean -\/ true or false if the file could be opened 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classReader_a3ecf6f8cff4852f2609a9ede8bd5af7e}\label{classReader_a3ecf6f8cff4852f2609a9ede8bd5af7e}} 
+\index{Reader@{Reader}!read\_header@{read\_header}}
+\index{read\_header@{read\_header}!Reader@{Reader}}
+\doxysubsubsection{\texorpdfstring{read\_header()}{read\_header()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} Reader\+::read\+\_\+header (\begin{DoxyParamCaption}\item[{const std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads in the header of filename into a \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & -\/ the name of the target file to read the header of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structwav__header}{wav\+\_\+header}} -\/ Return a \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object with attributes filled 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

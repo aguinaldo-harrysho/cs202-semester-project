@@ -9,15 +9,13 @@
 \DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}wave\_header.h"{}}}
 \DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}wave\_body.h"{}}}
 \DoxyCodeLine{8 }
-\DoxyCodeLine{9 \textcolor{comment}{//wav.cpp should be responsible for getting the data that isn't the header. Will likely extend the header in some way.}}
-\DoxyCodeLine{10 }
-\DoxyCodeLine{11 \textcolor{keyword}{class }\mbox{\hyperlink{classWav}{Wav}} \{}
-\DoxyCodeLine{12 \textcolor{keyword}{public}:}
-\DoxyCodeLine{13     \textcolor{keyword}{static} \mbox{\hyperlink{structwav__body}{wav\_body}} \mbox{\hyperlink{classWav_aa61bf8ecec0e995e0f177267704999ac}{combineHeaderAndBody}}(\mbox{\hyperlink{structwav__header}{wav\_header}}, \mbox{\hyperlink{structwav__body}{wav\_body}});}
-\DoxyCodeLine{14     \textcolor{keyword}{static} \mbox{\hyperlink{structwav__body}{wav\_body}} readBodyData(\mbox{\hyperlink{structwav__header}{wav\_header}}, std::string);}
-\DoxyCodeLine{15     \textcolor{keyword}{static} \textcolor{keywordtype}{void} writeAudiofile(\mbox{\hyperlink{structwav__body}{wav\_body}}, std::string); \textcolor{comment}{//Save a wav\_body as an actual playable wav file}}
-\DoxyCodeLine{16 \};}
-\DoxyCodeLine{17  }
-\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{classWav}{Wav}} \{}
+\DoxyCodeLine{14 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \textcolor{keyword}{static} \mbox{\hyperlink{structwav__body}{wav\_body}} \mbox{\hyperlink{classWav_aa61bf8ecec0e995e0f177267704999ac}{combineHeaderAndBody}}(\mbox{\hyperlink{structwav__header}{wav\_header}}, \mbox{\hyperlink{structwav__body}{wav\_body}});}
+\DoxyCodeLine{28     \textcolor{keyword}{static} \mbox{\hyperlink{structwav__body}{wav\_body}} \mbox{\hyperlink{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}{readBodyData}}(\mbox{\hyperlink{structwav__header}{wav\_header}}, std::string);}
+\DoxyCodeLine{34     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classWav_ad948ef7d459f18481f12c748c6eaee34}{writeAudiofile}}(\mbox{\hyperlink{structwav__body}{wav\_body}}, std::string); \textcolor{comment}{//Save a wav\_body as an actual playable wav file}}
+\DoxyCodeLine{35 \};}
+\DoxyCodeLine{36  }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
