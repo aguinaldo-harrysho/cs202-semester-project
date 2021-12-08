@@ -245,14 +245,14 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     return audiofile_body;
 }
 
-void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual playable wav file
+void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a wav_body as an actual playable wav file
 {
     int headerSize = 4 + (8 + audiofile_body.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
     int bodySize = audiofile_body.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
     std::string writer;
     
-    
-    std::ofstream myfile("count8.wav", std::ios::binary);
+    //filename
+    std::ofstream myfile("output.wav", std::ios::binary);
     //std::ofstream myfile("example.txt", std::ios::binary | std::ios::in);
     //myfile.open();
 
@@ -287,16 +287,16 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
         std::cout << "Mono" << std::endl;
         int tempest = audiofile_body.monoChannel_sounData.at(0);
         unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + 128;;
-        std::cout << std::dec;
-        std::cout << "Vector value: ";
-        std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
-        std::cout << "Unsigned Int: ";
-        std::cout << tempor << std::endl;
-        std::string tempors = std::bitset<8>(tempor).to_string();
-        std::cout << "String: ";
-        std::cout << tempors << std::endl;
-        std::cout << "Char cast: ";
-        std::cout << (char*) &tempor << std::endl;
+        // std::cout << std::dec;
+        // std::cout << "Vector value: ";
+        // std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
+        // std::cout << "Unsigned Int: ";
+        // std::cout << tempor << std::endl;
+        // std::string tempors = std::bitset<8>(tempor).to_string();
+        // std::cout << "String: ";
+        // std::cout << tempors << std::endl;
+        // std::cout << "Char cast: ";
+        // std::cout << (char*) &tempor << std::endl;
 
 
         for(int i = 0; i < sampleAmount; i++)//sampleAmount
