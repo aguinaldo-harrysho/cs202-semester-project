@@ -16,6 +16,12 @@ void handleMenu1();
 void printMetaData(wav_header header);
 void processAudio(int type, wav_body audiofile_body);
 
+/**
+ * Main application entry point.
+ * 
+ * Displays the start menu and prompts the user for input.
+ * 
+ */
 int main(){
 
     char menuChoice = '1';
@@ -42,6 +48,7 @@ int main(){
     }
 }
 
+//Prints the Start Menu
 void printStartMenu(){
 
     std::cout << "Welcome\nPlease select an option:" << std::endl;
@@ -51,6 +58,7 @@ void printStartMenu(){
 
 }
 
+//Prints the Processor Selection Menu
 void printProcessorMenu(){
 
     //std::cout << "Processor Menu\n" << std::endl;
@@ -133,6 +141,7 @@ void handleMenu1(){
     }
 }
 
+//Prompts user for output file name. Applies requested processor then saves a .wav file.
 void processAudio(int type, wav_body audiofile_body)
 {   
     char filename[1024];
@@ -156,6 +165,7 @@ void processAudio(int type, wav_body audiofile_body)
     }
 }
 
+//Prints file metadata information
 void printMetaData(wav_header header){
 
     std::cout << "File Metadata:" << std::endl;
