@@ -2,19 +2,20 @@
 #include <vector>
 #include <iostream>
 
+#include "wave_body.h"
 #include "gain.h"
 
-std::vector<float> Gain::process(std::vector<float> data)
+wav_body Gain::process(wav_body audiofile_body)
 {   
     float scale;
 
     std::cout << "Please specify a scaling factor for gain adjustment." << std::endl;
     std::cin >> scale;
 
-    for (int i = 0; i < data.size(); i++)
+    for (int i = 0; i < audiofile_body.monoChannel_sounData.size(); i++)
     {
-        data[i] = data[i] * scale;
+        audiofile_body.monoChannel_sounData[i] = audiofile_body.monoChannel_sounData[i] * scale;
     }
 
-    return data;
+    return audiofile_body;
 }
