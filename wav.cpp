@@ -129,6 +129,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     }
     else if(audiofile_body.num_channels == 2) // Stero
     {
+        int normalizeHolder1 = 0;
+        int normalizeHolder2 = 0;
         if(audiofile_body.bit_depth == 8)
         {
             int channelLength = sampleAmount/2; 
@@ -144,6 +146,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                 position++;
                 //sampleBuffer[position] += normalizer;
                 bufferStereo[i] = sampleBuffer[position]; // Second sample saved to stero channel
+                //normalizeHolder1 = normalizer;
+                //normalizeHolder2 = normalizer;
                 
             }
             //std::cout << "I made it here" << std::endl;
@@ -151,8 +155,10 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             {
                 //bufferMono[i] += normalizer; // Data will range from -128 to 127
                 //bufferStereo[i] += normalizer;
-                audiofile_body.monoChannel_sounData.push_back(bufferMono[i]);
-                audiofile_body.steroChannel_soundData.push_back(bufferStereo[i]);
+                normalizeHolder1 = (int)bufferMono[i] + normalizer;
+                normalizeHolder2 = (int)bufferStereo[i] + normalizer;
+                audiofile_body.monoChannel_sounData.push_back(normalizeHolder1);
+                audiofile_body.steroChannel_soundData.push_back(normalizeHolder2);
             }
         }
         else if(audiofile_body.bit_depth == 16)
@@ -176,8 +182,10 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                 intbin2 = (int)(test2.to_ulong());
                 //intbin1 -= normalizer; // Data will range from -32,768 to 32,767
                 //intbin2 -= normalizer;
-                audiofile_body.monoChannel_sounData.push_back(intbin1);
-                audiofile_body.steroChannel_soundData.push_back(intbin2);
+                normalizeHolder1 = intbin1 + normalizer;
+                normalizeHolder2 = intbin2 + normalizer;
+                audiofile_body.monoChannel_sounData.push_back(normalizeHolder1);
+                audiofile_body.steroChannel_soundData.push_back(normalizeHolder2);
             }
             //std::cout << "I made it here" << std::endl;
             // for(int i = 0; i < channelLength; i++)
