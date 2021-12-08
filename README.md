@@ -19,9 +19,6 @@ Two main challenges we encountered during this project were dealing with file re
 ### Issues with the Program
 The only issue we see is that the echo processor doesn't seem to work. We suspect that this may have to do with managing the length of the file.
 
-### TODO:
-wav_body.h, a struct that holds data for the actual audio in vectors. Will likely extend wav_header.
-
 ## Program Flow:
    1. Start: Present start menu ✔️
       - If user selects quit, exit program ✔️
