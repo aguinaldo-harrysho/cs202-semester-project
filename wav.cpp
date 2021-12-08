@@ -255,10 +255,13 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     std::ofstream myfile("output.wav", std::ios::binary);
     //std::ofstream myfile("example.txt", std::ios::binary | std::ios::in);
     //myfile.open();
-
     int sampleAmount = bodySize;
-    if(audiofile_body.bit_depth == 8) int sampleAmount = bodySize;
-    else int sampleAmount = bodySize/2;
+    
+    if(audiofile_body.bit_depth == 8) sampleAmount = bodySize;
+    else sampleAmount = bodySize/2;
+    std::cout << bodySize << std::endl;
+    std::cout << sampleAmount << std::endl;
+    
 
     int newSize = audiofile_body.monoChannel_sounData.size();
 
@@ -286,41 +289,48 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     {
         std::cout << "Mono" << std::endl;
         int tempest = audiofile_body.monoChannel_sounData.at(0);
-        unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + 128;;
-        // std::cout << std::dec;
-        // std::cout << "Vector value: ";
-        // std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
-        // std::cout << "Unsigned Int: ";
-        // std::cout << tempor << std::endl;
-        // std::string tempors = std::bitset<8>(tempor).to_string();
-        // std::cout << "String: ";
-        // std::cout << tempors << std::endl;
-        // std::cout << "Char cast: ";
-        // std::cout << (char*) &tempor << std::endl;
+        unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + unNormalizer;
+        std::cout << std::dec;
+        std::cout << "Vector value: ";
+        std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
+        std::cout << "Unsigned Int: ";
+        std::cout << tempor << std::endl;
+        std::string tempors = std::bitset<16>(tempor).to_string();
+        std::cout << "String: ";
+        std::cout << tempors << std::endl;
+        std::cout << "Char cast: ";
+        std::cout << (char*) &tempor << std::endl;
 
 
-        for(int i = 0; i < sampleAmount; i++)//sampleAmount
+        for(int i = 0; i < 8; i++)//sampleAmount
         {
-            int tempory = (int)audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+            //int tempory = (int)audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
             //std::cout << audiofile_body.monoChannel_sounData.at(i) << std::endl;
             //std::cout << unNormalizer << std::endl;
             // std::cout << "tempory: ";
             // std::cout << tempory << std::endl;
-            unsigned int intbin = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+            
             // std::cout << "Unsigned: ";
             // std::cout << intbin << std::endl;
             //std::string writer;// = std::bitset<8>(intbin).to_string();
             //int tempor = audiofile_body.monoChannel_sounData.at(i) 
             
-            if(audiofile_body.bit_depth == 8) 
+            if(audiofile_body.bit_depth == 8)
             {
                 //writer = std::bitset<8>(intbin).to_string();
+                unsigned int intbin = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+                std::cout << intbin << std::endl;
                 myfile.write((char*) &intbin, 1);
             }
             else 
             {
+                unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + unNormalizer;
+                //std::string tempors = std::bitset<16>(tempor).to_string();
+                std::cout << tempor << std::endl;
                 //writer = std::bitset<16>(intbin).to_string();
-                myfile.write((char*) &intbin, 1);
+                std::cout << reinterpret_cast<char const *>(&tempor) << std::endl;
+                myfile.write(reinterpret_cast<char const *>(&tempor), sizeof tempor);
+                //myfile.write((char*) &tempor, 1);
             }
             
         }
