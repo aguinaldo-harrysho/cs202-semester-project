@@ -22,10 +22,10 @@ wav_body Echo::process(wav_body audiofile_body)
 		//std::cout << i << std::endl;
 		if(i > delay) 
 		{
-			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData[i] + gain*audiofile_body.monoChannel_sounData[i - delay]);
+			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData.at(i) + gain*audiofile_body.monoChannel_sounData.at(i - delay));
 		
 		} else{
-			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData[i]);
+			audiofile_body.monoChannel_sounData.push_back(audiofile_body.monoChannel_sounData.at(i));
 		}
 	}
 	if(audiofile_body.num_channels == 2)
