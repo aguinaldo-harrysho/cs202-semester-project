@@ -1,7 +1,7 @@
 # ignore the executable program file
 wavprocessor
 # ignore .vscode
-*.vscode
+.vscode
 # ignore all object files since they are temporary
 *.o
 # ignore any example files created/used.
