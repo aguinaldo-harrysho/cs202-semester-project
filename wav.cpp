@@ -266,10 +266,7 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     std::ofstream myfile(filename, std::ios::binary);
     //std::ofstream myfile("example.txt", std::ios::binary | std::ios::in);
     //myfile.open();
-    int sampleAmount = bodySize;
-    
-    if(audiofile_body.bit_depth == 8) sampleAmount = bodySize;
-    else sampleAmount = bodySize/2;
+
     // std::cout << bodySize << std::endl;
     // std::cout << sampleAmount << std::endl;
     
@@ -295,6 +292,10 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
         newSize = newSize * 2;
         // std::cout << "Stereo" << std::endl;
     }
+    int sampleAmount = newSize;
+    
+    if(audiofile_body.bit_depth == 8) sampleAmount = newSize;
+    else sampleAmount = newSize/2;
     // std::cout << "At the end, newSize: " << newSize << std::endl;
     // std::cout << "bodySize: " << bodySize << std::endl;
     // std::cout << "data_bytes" << audiofile_body.data_bytes << std::endl;
@@ -317,8 +318,8 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     myfile.write((char*) &audiofile_body.byte_rate, 4);
     myfile.write((char*) &audiofile_body.sample_alignment, 2);
     myfile.write((char*) &audiofile_body.bit_depth, 2);
-    myfile.write(audiofile_body.data_header, 4);
-    myfile.write((char*) &bodySize, 4); // Change as needed. == NumSamples * NumChannels * BitsPerSample/8
+    myfile.write(audiofile_body.data_header, 4); // bodySize
+    myfile.write((char*) &newSize, 4); // Change as needed. == NumSamples * NumChannels * BitsPerSample/8
 
     //Header writing seems to work flawlessly but the body writing is having issues. Possible has something to with how it's converted when writen.
     int unNormalizer = 0;
