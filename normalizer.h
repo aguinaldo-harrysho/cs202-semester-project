@@ -11,5 +11,5 @@ class Normalizer
      * @param data - Samples from the data section of the input file.
      * @return std::vector<float>
      */
-    static std::vector<float> process (std::vector<float>);
+    static wav_body process (wav_body);
 };

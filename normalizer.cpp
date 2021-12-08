@@ -2,27 +2,28 @@
 #include <iostream>
 #include <cmath>
 
+#include "wave_body.h"
 #include "normalizer.h"
 
-std::vector<float> Normalizer::process(std::vector<float> data)
+wav_body Normalizer::process(wav_body audiofile_body)
 {
     float max = 0.0f;
     float scale;
 
-    for (int i = 0; i<data.size(); i++)
+    for (int i = 0; i<audiofile_body.monoChannel_sounData.size(); i++)
     {
-        if (std::abs(data[i]) >= max)
+        if (std::abs(audiofile_body.monoChannel_sounData[i]) >= max)
         {
-            max = std::abs(data[i]);
+            max = std::abs(audiofile_body.monoChannel_sounData[i]);
         }
     }
 
     scale = 1 / max;
 
-    for (int i = 0; i < data.size(); i++)
+    for (int i = 0; i < audiofile_body.monoChannel_sounData.size(); i++)
     {
-        data[i] = data[i]*scale;
+        audiofile_body.monoChannel_sounData[i] = audiofile_body.monoChannel_sounData[i]*scale;
     }
 
-    return data;
+    return audiofile_body;
 }
