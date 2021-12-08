@@ -1,3 +1,5 @@
+/** @file */
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -20,7 +22,7 @@ void processAudio(int type, wav_body audiofile_body);
  * Main application entry point.
  * 
  * Displays the start menu and prompts the user for input.
- * 
+ * @return
  */
 int main(){
 
