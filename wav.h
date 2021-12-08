@@ -8,6 +8,10 @@
 
 //wav.cpp should be responsible for getting the data that isn't the header. Will likely extend the header in some way.
 
+/**
+ * @brief This is the Normalizer class
+ * 
+ */
 class Wav {
 public:
     static wav_body combineHeaderAndBody(wav_header, wav_body);
