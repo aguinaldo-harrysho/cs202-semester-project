@@ -71,17 +71,20 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;wave_header.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classReader.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classReader.html">Reader</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">static</span> <a class="code hl_struct" href="structwav__header.html">wav_header</a> header;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> read_file(<span class="keyword">const</span> std::string);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">static</span> <a class="code hl_struct" href="structwav__header.html">wav_header</a> read_header(<span class="keyword">const</span> std::string);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> check_header(<a class="code hl_struct" href="structwav__header.html">wav_header</a>);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>};</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassReader_html"><div class="ttname"><a href="classReader.html">Reader</a></div><div class="ttdef"><b>Definition:</b> reader.h:8</div></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classReader.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classReader.html">Reader</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">static</span> <a class="code hl_struct" href="structwav__header.html">wav_header</a> header;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classReader.html#a8e3f86be76e4dd4ed6152279b7398652">read_file</a>(<span class="keyword">const</span> std::string);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">static</span> <a class="code hl_struct" href="structwav__header.html">wav_header</a> <a class="code hl_function" href="classReader.html#a3ecf6f8cff4852f2609a9ede8bd5af7e">read_header</a>(<span class="keyword">const</span> std::string);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classReader.html#afeaa8cf74560159c41321e7e1b954218">check_header</a>(<a class="code hl_struct" href="structwav__header.html">wav_header</a>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassReader_html"><div class="ttname"><a href="classReader.html">Reader</a></div><div class="ttdef"><b>Definition:</b> reader.h:11</div></div>
+<div class="ttc" id="aclassReader_html_a3ecf6f8cff4852f2609a9ede8bd5af7e"><div class="ttname"><a href="classReader.html#a3ecf6f8cff4852f2609a9ede8bd5af7e">Reader::read_header</a></div><div class="ttdeci">static wav_header read_header(const std::string)</div><div class="ttdoc">Reads in the header of filename into a wav_header object.</div><div class="ttdef"><b>Definition:</b> reader.cpp:11</div></div>
+<div class="ttc" id="aclassReader_html_a8e3f86be76e4dd4ed6152279b7398652"><div class="ttname"><a href="classReader.html#a8e3f86be76e4dd4ed6152279b7398652">Reader::read_file</a></div><div class="ttdeci">static bool read_file(const std::string)</div><div class="ttdoc">Attempts to open the target file.</div><div class="ttdef"><b>Definition:</b> reader.cpp:4</div></div>
+<div class="ttc" id="aclassReader_html_afeaa8cf74560159c41321e7e1b954218"><div class="ttname"><a href="classReader.html#afeaa8cf74560159c41321e7e1b954218">Reader::check_header</a></div><div class="ttdeci">static bool check_header(wav_header)</div><div class="ttdoc">Checks to see if the data in the wav_header object contains data for a WAV file.</div><div class="ttdef"><b>Definition:</b> reader.cpp:40</div></div>
 <div class="ttc" id="astructwav__header_html"><div class="ttname"><a href="structwav__header.html">wav_header</a></div><div class="ttdef"><b>Definition:</b> wave_header.h:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

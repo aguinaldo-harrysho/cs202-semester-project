@@ -1,17 +1,27 @@
 \hypertarget{classWav}{}\doxysection{Wav Class Reference}
 \label{classWav}\index{Wav@{Wav}}
+
+
+This is the \mbox{\hyperlink{classWav}{Wav}} class. Responsible for reading in and saving \mbox{\hyperlink{classWav}{Wav}} data.  
+
+
+
+
+{\ttfamily \#include $<$wav.\+h$>$}
+
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} \mbox{\hyperlink{classWav_aa61bf8ecec0e995e0f177267704999ac}{combine\+Header\+And\+Body}} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}, \mbox{\hyperlink{structwav__body}{wav\+\_\+body}})
-\begin{DoxyCompactList}\small\item\em Combines data from audiofile\+\_\+header into audiofile\+\_\+body so that the data can be used easier. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}\label{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}} 
-static \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} {\bfseries read\+Body\+Data} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}, std\+::string)
-\item 
-\mbox{\Hypertarget{classWav_ad948ef7d459f18481f12c748c6eaee34}\label{classWav_ad948ef7d459f18481f12c748c6eaee34}} 
-static void {\bfseries write\+Audiofile} (\mbox{\hyperlink{structwav__body}{wav\+\_\+body}}, std\+::string)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em pulls the data from a \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} into a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} \mbox{\hyperlink{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}{read\+Body\+Data}} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}, std\+::string)
+\begin{DoxyCompactList}\small\item\em creates a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} object with the audio data from the \mbox{\hyperlink{classWav}{Wav}} file \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classWav_ad948ef7d459f18481f12c748c6eaee34}{write\+Audiofile}} (\mbox{\hyperlink{structwav__body}{wav\+\_\+body}}, std\+::string)
+\begin{DoxyCompactList}\small\item\em saves and write data of a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} into a usable wav file \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+This is the \mbox{\hyperlink{classWav}{Wav}} class. Responsible for reading in and saving \mbox{\hyperlink{classWav}{Wav}} data. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classWav_aa61bf8ecec0e995e0f177267704999ac}\label{classWav_aa61bf8ecec0e995e0f177267704999ac}} 
@@ -22,8 +32,20 @@ static void {\bfseries write\+Audiofile} (\mbox{\hyperlink{structwav__body}{wav\
 
 
 
-Combines data from audiofile\+\_\+header into audiofile\+\_\+body so that the data can be used easier. 
+pulls the data from a \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} into a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} 
 
+Combines data from audiofile\+\_\+header into audiofile\+\_\+body so that the data can be used easier.
+
+
+\begin{DoxyParams}{Parameters}
+{\em audiofile\+\_\+header} & -\/ the \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} object to pull from \\
+\hline
+{\em audiofile\+\_\+body} & -\/ the \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} object to add \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} data to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structwav__body}{wav\+\_\+body}} -\/ the \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} object with header data
+\end{DoxyReturn}
 
 \begin{DoxyParams}{Parameters}
 {\em audiofile\+\_\+header} & struct that only holds data fro the header of a WAV file \\
@@ -34,6 +56,43 @@ Combines data from audiofile\+\_\+header into audiofile\+\_\+body so that the da
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}\label{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}} 
+\index{Wav@{Wav}!readBodyData@{readBodyData}}
+\index{readBodyData@{readBodyData}!Wav@{Wav}}
+\doxysubsubsection{\texorpdfstring{readBodyData()}{readBodyData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} Wav\+::read\+Body\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}}]{audiofile\+\_\+header,  }\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+creates a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} object with the audio data from the \mbox{\hyperlink{classWav}{Wav}} file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em audiofile\+\_\+header} & -\/ the \mbox{\hyperlink{structwav__header}{wav\+\_\+header}} data of the file you wish to read from \\
+\hline
+{\em filename} & -\/ the file to read audio data from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structwav__body}{wav\+\_\+body}} -\/ a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} object with header and body (audio) data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classWav_ad948ef7d459f18481f12c748c6eaee34}\label{classWav_ad948ef7d459f18481f12c748c6eaee34}} 
+\index{Wav@{Wav}!writeAudiofile@{writeAudiofile}}
+\index{writeAudiofile@{writeAudiofile}!Wav@{Wav}}
+\doxysubsubsection{\texorpdfstring{writeAudiofile()}{writeAudiofile()}}
+{\footnotesize\ttfamily void Wav\+::write\+Audiofile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structwav__body}{wav\+\_\+body}}}]{audiofile\+\_\+body,  }\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+saves and write data of a \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} into a usable wav file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em audiofile\+\_\+body} & -\/ the \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} data you wish to write into a file \\
+\hline
+{\em filename} & -\/ the name of the file you wish to save it as \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

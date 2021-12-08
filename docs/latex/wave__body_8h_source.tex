@@ -4,18 +4,19 @@
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#include <string>}}
 \DoxyCodeLine{2 \textcolor{preprocessor}{\#include <vector>}}
 \DoxyCodeLine{3 \textcolor{preprocessor}{\#include <memory>}}
-\DoxyCodeLine{4 }
-\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef WAVE\_BODY\_WAVE\_BODY\_H}}
-\DoxyCodeLine{6 \textcolor{preprocessor}{\#define WAVE\_BODY\_WAVE\_BODY\_H}}
-\DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structwav__body}{wav\_body}}: \textcolor{keyword}{public} \mbox{\hyperlink{structwav__header}{wav\_header}}}
-\DoxyCodeLine{9 \{}
-\DoxyCodeLine{10 }
-\DoxyCodeLine{11     std::vector<char> bytes; \textcolor{comment}{// Remainder of wave file is bytes, holds both channels if present}}
-\DoxyCodeLine{12     std::vector<float> monoChannel\_sounData; \textcolor{comment}{// Holds data for first channel (everything if audio is mono)}}
-\DoxyCodeLine{13     std::vector<float> steroChannel\_soundData; \textcolor{comment}{// Holds data for second channel (only used when stero)}}
-\DoxyCodeLine{14 }
-\DoxyCodeLine{15 \} \mbox{\hyperlink{structwav__body}{wav\_body}};}
-\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//WAVE\_BODY\_WAVE\_BODY\_H}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}wave\_header.h"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifndef WAVE\_BODY\_WAVE\_BODY\_H}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define WAVE\_BODY\_WAVE\_BODY\_H}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structwav__body}{wav\_body}}: \textcolor{keyword}{public} \mbox{\hyperlink{structwav__header}{wav\_header}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     std::vector<char> bytes; \textcolor{comment}{// Remainder of wave file is bytes, holds both channels if present}}
+\DoxyCodeLine{13     std::vector<float> monoChannel\_sounData; \textcolor{comment}{// Holds data for first channel (everything if audio is mono)}}
+\DoxyCodeLine{14     std::vector<float> steroChannel\_soundData; \textcolor{comment}{// Holds data for second channel (only used when stero)}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \} \mbox{\hyperlink{structwav__body}{wav\_body}};}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//WAVE\_BODY\_WAVE\_BODY\_H}}
 
 \end{DoxyCode}

@@ -69,17 +69,19 @@ $(function() {
   <div class="headertitle"><div class="title">Reader Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="reader_8h_source.html">reader.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8e3f86be76e4dd4ed6152279b7398652"><td class="memItemLeft" align="right" valign="top"><a id="a8e3f86be76e4dd4ed6152279b7398652" name="a8e3f86be76e4dd4ed6152279b7398652"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>read_file</b> (const std::string)</td></tr>
+<tr class="memitem:a8e3f86be76e4dd4ed6152279b7398652"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReader.html#a8e3f86be76e4dd4ed6152279b7398652">read_file</a> (const std::string)</td></tr>
+<tr class="memdesc:a8e3f86be76e4dd4ed6152279b7398652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to open the target file.  <a href="classReader.html#a8e3f86be76e4dd4ed6152279b7398652">More...</a><br /></td></tr>
 <tr class="separator:a8e3f86be76e4dd4ed6152279b7398652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ecf6f8cff4852f2609a9ede8bd5af7e"><td class="memItemLeft" align="right" valign="top"><a id="a3ecf6f8cff4852f2609a9ede8bd5af7e" name="a3ecf6f8cff4852f2609a9ede8bd5af7e"></a>
-static <a class="el" href="structwav__header.html">wav_header</a>&#160;</td><td class="memItemRight" valign="bottom"><b>read_header</b> (const std::string)</td></tr>
+<tr class="memitem:a3ecf6f8cff4852f2609a9ede8bd5af7e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structwav__header.html">wav_header</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReader.html#a3ecf6f8cff4852f2609a9ede8bd5af7e">read_header</a> (const std::string)</td></tr>
+<tr class="memdesc:a3ecf6f8cff4852f2609a9ede8bd5af7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in the header of filename into a <a class="el" href="structwav__header.html">wav_header</a> object.  <a href="classReader.html#a3ecf6f8cff4852f2609a9ede8bd5af7e">More...</a><br /></td></tr>
 <tr class="separator:a3ecf6f8cff4852f2609a9ede8bd5af7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afeaa8cf74560159c41321e7e1b954218"><td class="memItemLeft" align="right" valign="top"><a id="afeaa8cf74560159c41321e7e1b954218" name="afeaa8cf74560159c41321e7e1b954218"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>check_header</b> (<a class="el" href="structwav__header.html">wav_header</a>)</td></tr>
+<tr class="memitem:afeaa8cf74560159c41321e7e1b954218"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classReader.html#afeaa8cf74560159c41321e7e1b954218">check_header</a> (<a class="el" href="structwav__header.html">wav_header</a>)</td></tr>
+<tr class="memdesc:afeaa8cf74560159c41321e7e1b954218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if the data in the <a class="el" href="structwav__header.html">wav_header</a> object contains data for a WAV file.  <a href="classReader.html#afeaa8cf74560159c41321e7e1b954218">More...</a><br /></td></tr>
 <tr class="separator:afeaa8cf74560159c41321e7e1b954218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
@@ -88,6 +90,114 @@ Static Public Attributes</h2></td></tr>
 static <a class="el" href="structwav__header.html">wav_header</a>&#160;</td><td class="memItemRight" valign="bottom"><b>header</b></td></tr>
 <tr class="separator:a9b21913e6629f9747ba6f95440828a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >This is the <a class="el" href="classReader.html">Reader</a> class </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="afeaa8cf74560159c41321e7e1b954218" name="afeaa8cf74560159c41321e7e1b954218"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeaa8cf74560159c41321e7e1b954218">&#9670;&nbsp;</a></span>check_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Reader::check_header </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structwav__header.html">wav_header</a>&#160;</td>
+          <td class="paramname"><em>header</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks to see if the data in the <a class="el" href="structwav__header.html">wav_header</a> object contains data for a WAV file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">header</td><td>- the <a class="el" href="structwav__header.html">wav_header</a> object to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean - true or false if the data in header is for a WAV file </dd></dl>
+
+</div>
+</div>
+<a id="a8e3f86be76e4dd4ed6152279b7398652" name="a8e3f86be76e4dd4ed6152279b7398652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3f86be76e4dd4ed6152279b7398652">&#9670;&nbsp;</a></span>read_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Reader::read_file </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to open the target file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>- the name of the target file to open </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean - true or false if the file could be opened </dd></dl>
+
+</div>
+</div>
+<a id="a3ecf6f8cff4852f2609a9ede8bd5af7e" name="a3ecf6f8cff4852f2609a9ede8bd5af7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ecf6f8cff4852f2609a9ede8bd5af7e">&#9670;&nbsp;</a></span>read_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structwav__header.html">wav_header</a> Reader::read_header </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads in the header of filename into a <a class="el" href="structwav__header.html">wav_header</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>- the name of the target file to read the header of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structwav__header.html">wav_header</a> - Return a <a class="el" href="structwav__header.html">wav_header</a> object with attributes filled </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="reader_8h_source.html">reader.h</a></li>
 <li>reader.cpp</li>
