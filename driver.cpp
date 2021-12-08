@@ -76,7 +76,7 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
 
     if(filename == "1") filename = "yes-8-bit-mono.wav";
     else if(filename == "2") filename = "yes-16-bit-mono.wav";
-    else if(filename == "3'") filename = "stereo-16-bit.wav";
+    else if(filename == "3") filename = "stereo-16-bit.wav";
     std::cout << filename << std::endl;
 
     // switch(filename)
