@@ -161,7 +161,7 @@ void processAudio(int type, wav_body audiofile_body)
             Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 3:
-            Normalizer::process(audiofile_body.monoChannel_sounData);
+            audiofile_body = Normalizer::process(audiofile_body);
             Wav::writeAudiofile(audiofile_body, filename);
             break;
     }
