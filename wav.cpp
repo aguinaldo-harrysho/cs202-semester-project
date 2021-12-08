@@ -38,7 +38,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     wav_body audiofile_body; // Where the body data will be saved. audiofile_header's data will also be copied to here.
 
     int headerSize = 4 + (8 + audiofile_header.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
-    int bodySize = audiofile_header.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
+    //int bodySize = audiofile_header.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
+    int bodySize = audiofile_header.data_bytes;
 
     // std::cout << bodySize << std::endl;
     // std::cout << audiofile_header.data_bytes << std::endl;
@@ -257,7 +258,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
 void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a wav_body as an actual playable wav file
 {
     int headerSize = 4 + (8 + audiofile_body.fmt_chunk_size) + 8 + 8; // That last 8 should be 6 but for some reason we started reason part of the header? idk.
-    int bodySize = audiofile_body.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
+    //int bodySize = audiofile_body.wav_size - (headerSize - 8); // Amount of bytes that make up the audio data.
+    int bodySize = audiofile_body.data_bytes;
     std::string writer;
     
     //filename
@@ -294,14 +296,18 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
         std::cout << "Stereo" << std::endl;
     }
     std::cout << "At the end, newSize: " << newSize << std::endl;
-    std::cout << "Should be equal to: " << audiofile_body.data_bytes << std::endl;
+    std::cout << "bodySize: " << bodySize << std::endl;
+    std::cout << "data_bytes" << audiofile_body.data_bytes << std::endl;
     
     
 
     //Header writing code, bit_depth and num_channels don't matter for this. wav_size and data_btes need to be modified if an effect like echo made the vector longer.
     myfile.write(audiofile_body.riff_header, 4);
-    myfile.write((char*) &audiofile_body.wav_size, 4); // Change as needed. 36 + SubChunk2Size
-
+    //myfile.write((char*) &audiofile_body.wav_size, 4); // Change as needed. 36 + SubChunk2Size
+    int wave_size = bodySize + 36;
+    std::cout << "wave_size: " << wave_size <<  std::endl;
+    std::cout << "audiofile_body.wav_size: " << audiofile_body.wav_size <<  std::endl;
+    myfile.write((char*) &wave_size, 4); // Change as needed. 36 + SubChunk2Size
     myfile.write(audiofile_body.wave_header, 4);
     myfile.write(audiofile_body.fmt_header, 4);
     myfile.write((char*) &audiofile_body.fmt_chunk_size, 4);
@@ -312,7 +318,7 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     myfile.write((char*) &audiofile_body.sample_alignment, 2);
     myfile.write((char*) &audiofile_body.bit_depth, 2);
     myfile.write(audiofile_body.data_header, 4);
-    myfile.write((char*) &newSize, 4); // Change as needed. == NumSamples * NumChannels * BitsPerSample/8
+    myfile.write((char*) &bodySize, 4); // Change as needed. == NumSamples * NumChannels * BitsPerSample/8
 
     //Header writing seems to work flawlessly but the body writing is having issues. Possible has something to with how it's converted when writen.
     int unNormalizer = 0;
