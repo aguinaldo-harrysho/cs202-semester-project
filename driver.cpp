@@ -157,7 +157,7 @@ void processAudio(int type, wav_body audiofile_body)
             Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 2:
-            Gain::process(audiofile_body.monoChannel_sounData);
+            audiofile_body = Gain::process(audiofile_body);
             Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 3:
