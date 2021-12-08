@@ -63,22 +63,31 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
     if(audiofile_body.bit_depth == 8) sampleAmount = bodySize;
     else sampleAmount = bodySize/2;
     unsigned int sampleBuffer[sampleAmount];
+    int normalizer = 0;
 
     
     // Distinguish each byte.
     if(audiofile_body.bit_depth == 8)
     {
+        normalizer = -128;
         int intbin; // buffer values will be saved here to convert them to an int.
 
-        for(int i = 0; i < bodySize; i++)
+        for(int i = 0; i < bodySize; i++) // bodySize
         {
                 intbin = buffer[i]; // Convert to int to later save to float vector.
+                //std::cout << intbin << std::endl;
+                //intbin += normalizer;
+                //std::cout << intbin << std::endl;
                 sampleBuffer[i] = intbin;
+                //std::cout << sampleBuffer[i] << std::endl;
+                //sampleBuffer[i] -= 128; // Data will range from -128 to 127
+                //std::cout << sampleBuffer[i] << std::endl;
         }
 
     }
     else if(audiofile_body.bit_depth == 16) // Program will either do nothing or break if we ever get a bit depth that isn't 8 or 16.
     {
+        normalizer = -32768;
         unsigned int intbin; // buffer values will be saved here to convert them to an int.
         //std::bitset<16> foo;
         std::bitset<8> test1;
@@ -98,15 +107,24 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             //std::cout << foo << std::endl;
             position++;
             intbin = (int)(foo.to_ulong());
+            //intbin += normalizer;
             sampleBuffer[i] = intbin; //0,1,2,3
+            //sampleBuffer[i] -= 32768; // Data will range from -32,768 to 32,767
         }
         
     }
-    //std::cout << "I made it here" << std::endl;
     if(audiofile_body.num_channels == 1) // Mono
     {
-        //std::cout << "I made it here" << std::endl;
-        for(int i = 0; i < sampleAmount; i ++) audiofile_body.monoChannel_sounData.push_back(sampleBuffer[i]); // Save to float vector.
+        
+        for(int i = 0; i < sampleAmount; i ++) // sampleAmount
+        {
+            //sampleBuffer[i] += normalizer; // Data will range from -32,768 to 32,767
+            int normalizeHolder = normalizer;
+            normalizeHolder = (int)sampleBuffer[i] + normalizer;
+            audiofile_body.monoChannel_sounData.push_back(normalizeHolder); // Save to float vector.
+            //std::cout << audiofile_body.monoChannel_sounData.at(i);
+
+        }
         
     }
     else if(audiofile_body.num_channels == 2) // Stero
@@ -121,13 +139,17 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
             for(int i = 0; i < channelLength; i++)
             {
                 position++;
+                //sampleBuffer[position] += normalizer;
                 bufferMono[i] = sampleBuffer[position]; // First sample saved to mono channel
                 position++;
+                //sampleBuffer[position] += normalizer;
                 bufferStereo[i] = sampleBuffer[position]; // Second sample saved to stero channel
             }
             //std::cout << "I made it here" << std::endl;
             for(int i = 0; i < channelLength; i++)
             {
+                //bufferMono[i] += normalizer; // Data will range from -128 to 127
+                //bufferStereo[i] += normalizer;
                 audiofile_body.monoChannel_sounData.push_back(bufferMono[i]);
                 audiofile_body.steroChannel_soundData.push_back(bufferStereo[i]);
             }
@@ -151,6 +173,8 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                 test2 = sampleBuffer[positioner]; // Second sample saved to stero channel
                 intbin1 = (int)(test1.to_ulong());
                 intbin2 = (int)(test2.to_ulong());
+                //intbin1 -= normalizer; // Data will range from -32,768 to 32,767
+                //intbin2 -= normalizer;
                 audiofile_body.monoChannel_sounData.push_back(intbin1);
                 audiofile_body.steroChannel_soundData.push_back(intbin2);
             }
@@ -254,13 +278,18 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
     myfile.write((char*) &audiofile_body.data_bytes, 4); // Change as needed
 
     //Header writing seems to work flawlessly but the body writing is having issues. Possible has something to with how it's converted when writen.
-    
+    int unNormalizer = 0;
+    if(audiofile_body.bit_depth == 8) unNormalizer = 128;
+    else unNormalizer = 32768;
+
     if(audiofile_body.num_channels == 1)
     {
         std::cout << "Mono" << std::endl;
-
-        unsigned int tempor = audiofile_body.monoChannel_sounData.at(0);
+        int tempest = audiofile_body.monoChannel_sounData.at(0);
+        unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + 128;;
         std::cout << std::dec;
+        std::cout << "Vector value: ";
+        std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
         std::cout << "Unsigned Int: ";
         std::cout << tempor << std::endl;
         std::string tempors = std::bitset<8>(tempor).to_string();
@@ -270,20 +299,28 @@ void Wav::writeAudiofile(wav_body audiofile_body) //Save a wav_body as an actual
         std::cout << (char*) &tempor << std::endl;
 
 
-        for(int i = 0; i < sampleAmount; i++)
+        for(int i = 0; i < sampleAmount; i++)//sampleAmount
         {
-            unsigned int intbin = audiofile_body.monoChannel_sounData.at(i);
-            std::string writer;// = std::bitset<8>(intbin).to_string();
+            int tempory = (int)audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+            //std::cout << audiofile_body.monoChannel_sounData.at(i) << std::endl;
+            //std::cout << unNormalizer << std::endl;
+            // std::cout << "tempory: ";
+            // std::cout << tempory << std::endl;
+            unsigned int intbin = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+            // std::cout << "Unsigned: ";
+            // std::cout << intbin << std::endl;
+            //std::string writer;// = std::bitset<8>(intbin).to_string();
+            //int tempor = audiofile_body.monoChannel_sounData.at(i) 
             
             if(audiofile_body.bit_depth == 8) 
             {
-                writer = std::bitset<8>(intbin).to_string();
+                //writer = std::bitset<8>(intbin).to_string();
                 myfile.write((char*) &intbin, 1);
             }
             else 
             {
-                writer = std::bitset<16>(intbin).to_string();
-                myfile.write((char*) &writer, 1);
+                //writer = std::bitset<16>(intbin).to_string();
+                myfile.write((char*) &intbin, 1);
             }
             
         }

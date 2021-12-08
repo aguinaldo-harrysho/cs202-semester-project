@@ -145,6 +145,9 @@ void processAudio(int type, wav_body audiofile_body)
         case 1:
             //Echo echo;
             //echo.process(data);
+            std::cout << "Vector data: ";
+            std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
+
             Wav::writeAudiofile(audiofile_body);
             break;
         case 2:
