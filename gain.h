@@ -14,6 +14,5 @@ class Gain
      * 
      * @param data - Samples from the data section of the input file.
      */
-    //static std::vector<float>process(std::vector<float> data);
     static wav_body process(wav_body audiofile_body);
 };
