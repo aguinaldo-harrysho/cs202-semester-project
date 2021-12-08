@@ -388,7 +388,7 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     }
     else
     {
-        std::cout << "Stereo" << std::endl;
+        //std::cout << "Stereo" << std::endl;
         //int positioner = -1;
         for(int i = 0; i < sampleAmount/2; i++)
         {
