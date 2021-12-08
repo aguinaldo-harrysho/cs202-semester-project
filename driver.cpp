@@ -16,8 +16,14 @@ void handleMenu1();
 void printMetaData(wav_header header);
 void processAudio(int type, wav_body audiofile_body);
 
+/**
+ * Main application entry point.
+ * 
+ * Displays the start menu and prompts the user for input.
+ * 
+ */
 int main(){
-    
+
     char menuChoice = '1';
 
     while (menuChoice!='0') {
@@ -25,8 +31,6 @@ int main(){
         printStartMenu();
 
         std::cin >> menuChoice;
-        //input = 1; // Disabled input for testing, re-enable when done developing
-        //std::cout << "1" << std::endl; // To visually simualte selecting "1". Delete when done
         std::cout << std::endl;
 
         switch(menuChoice){
@@ -44,6 +48,7 @@ int main(){
     }
 }
 
+//Prints the Start Menu
 void printStartMenu(){
 
     std::cout << "Welcome\nPlease select an option:" << std::endl;
@@ -53,6 +58,7 @@ void printStartMenu(){
 
 }
 
+//Prints the Processor Selection Menu
 void printProcessorMenu(){
 
     //std::cout << "Processor Menu\n" << std::endl;
@@ -62,16 +68,14 @@ void printProcessorMenu(){
 
 }
 
-void handleMenu1(){//Executes when user chooses option 1 from main menu
+//Executes when user chooses option 1 from main menu
+void handleMenu1(){
 
     std::string filename;
     char menuChoice = '1';
 
     std::cout << "Please enter a .wav filename: " << std::endl;
     std::cin >> filename;
-    //filename = "yes-16-bit-mono.wav"; // Filename explicitly defined for testing, re-enable when done developing
-     // To visually simualte typing a filename. Delete when done
-
     std::cout << std::endl;
 
     if(filename == "1") filename = "yes-8-bit-mono.wav";
@@ -79,20 +83,6 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     else if(filename == "3") filename = "stereo-16-bit.wav";
     std::cout << filename << std::endl;
 
-    // switch(filename)
-    // {
-    //     case "1":
-    //         filename = "yes-8-bit-mono.wav";
-    //         break;
-    //     case "2":
-    //         filename = "yes-16-bit-mono.wav";
-    //         break;
-    //     case "3":
-    //         filename = "stereo-16-bit.wav";
-    //         break;
-
-    // }
-    
     // Check file validity
     if(Reader::read_file(filename)) std::cout << "File successfully opened." << std::endl;
     else
@@ -101,7 +91,9 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         exit(0); // Currently just exits the program, maybe change later to keep the rpogram running
     }
 
-    wav_header audiofile_header = Reader::read_header(filename); //Read the header of the file
+    //Read the header of the file
+    wav_header audiofile_header = Reader::read_header(filename);
+
     if(Reader::check_header(audiofile_header))
     {
         std::cout << "WAV successfully file identified.\n" << std::endl;
@@ -111,18 +103,14 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
         std::cout << "There was an error identifying the filetype." << std::endl;
         exit(0); // Currently just exits the program, maybe change later to keep the rpogram running
     }
-    // Assuming we make it here, we now have audiofile_header of type wav_header. It is the header data of the specified file.
 
     // Print header metadata
     printMetaData(audiofile_header);
-    std::cout << std::endl;
 
-    //[function to open file, store its contents in memory, then close it]
+    //Read information from the file and store it as a wav_body audiofile_body
     wav_body audiofile_body = Wav::readBodyData(audiofile_header, filename);
-    // At this point in the program you now have audiofile_body which contains a vector of ints represtning each byte of a single channel.
-    // That vector is monoChannel_sounData. Access is using audiofile_body.monoChannel_sounData.at(i)
-    // Presumbably you would pass a wav_body object to whatever calss your using for your effects. In the end there will be two vectors, the second one caled steroChannel_soundData;
 
+    //Handle Processor Menu
     while(menuChoice!='0'){
 
         printProcessorMenu();
@@ -153,6 +141,7 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     }
 }
 
+//Prompts user for output file name. Applies requested processor then saves a .wav file.
 void processAudio(int type, wav_body audiofile_body)
 {   
     char filename[1024];
@@ -162,24 +151,21 @@ void processAudio(int type, wav_body audiofile_body)
     switch(type)
     {
         case 1:
-            //Echo echo;
-            //echo.process(data);
-            std::cout << "Vector data: ";
-            std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
-
+            Echo::process(audiofile_body.monoChannel_sounData);
             Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 2:
-            //Gain gain;
-            //gain.process(data);
+            Gain::process(audiofile_body.monoChannel_sounData);
+            Wav::writeAudiofile(audiofile_body, filename);
             break;
         case 3:
-            //Normalizer normalizer;
-            //normalizer.process(data);
+            Normalizer::process(audiofile_body.monoChannel_sounData);
+            Wav::writeAudiofile(audiofile_body, filename);
             break;
     }
 }
 
+//Prints file metadata information
 void printMetaData(wav_header header){
 
     std::cout << "File Metadata:" << std::endl;
@@ -187,6 +173,6 @@ void printMetaData(wav_header header){
     std::cout << "Wav Size: " << header.wav_size << std::endl;
     std::cout << "# Channels: " << header.num_channels << std::endl;
     std::cout << "Sample Rate: " << header.sample_rate << std::endl;
-    std::cout << "Bit Depth: " << header.bit_depth << std::endl;
+    std::cout << "Bit Depth: " << header.bit_depth << std::endl << std::endl;
 
 }
