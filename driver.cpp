@@ -68,11 +68,30 @@ void handleMenu1(){//Executes when user chooses option 1 from main menu
     char menuChoice = '1';
 
     std::cout << "Please enter a .wav filename: " << std::endl;
-    //std::cin >> filename;
-    filename = "yes-16-bit-mono.wav"; // Filename explicitly defined for testing, re-enable when done developing
-    std::cout << filename << std::endl; // To visually simualte typing a filename. Delete when done
+    std::cin >> filename;
+    //filename = "yes-16-bit-mono.wav"; // Filename explicitly defined for testing, re-enable when done developing
+     // To visually simualte typing a filename. Delete when done
 
     std::cout << std::endl;
+
+    if(filename == "1") filename = "yes-8-bit-mono.wav";
+    else if(filename == "2") filename = "yes-16-bit-mono.wav";
+    else if(filename == "3'") filename = "stereo-16-bit.wav";
+    std::cout << filename << std::endl;
+
+    // switch(filename)
+    // {
+    //     case "1":
+    //         filename = "yes-8-bit-mono.wav";
+    //         break;
+    //     case "2":
+    //         filename = "yes-16-bit-mono.wav";
+    //         break;
+    //     case "3":
+    //         filename = "stereo-16-bit.wav";
+    //         break;
+
+    // }
     
     // Check file validity
     if(Reader::read_file(filename)) std::cout << "File successfully opened." << std::endl;
