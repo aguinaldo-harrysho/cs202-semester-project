@@ -1,0 +1,42 @@
+\hypertarget{classWav}{}\doxysection{Wav Class Reference}
+\label{classWav}\index{Wav@{Wav}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} \mbox{\hyperlink{classWav_aa61bf8ecec0e995e0f177267704999ac}{combine\+Header\+And\+Body}} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}, \mbox{\hyperlink{structwav__body}{wav\+\_\+body}})
+\begin{DoxyCompactList}\small\item\em Combines data from audiofile\+\_\+header into audiofile\+\_\+body so that the data can be used easier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}\label{classWav_a0d4e5dd9188b78a8b84b42da6e0857fa}} 
+static \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} {\bfseries read\+Body\+Data} (\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}, std\+::string)
+\item 
+\mbox{\Hypertarget{classWav_ad948ef7d459f18481f12c748c6eaee34}\label{classWav_ad948ef7d459f18481f12c748c6eaee34}} 
+static void {\bfseries write\+Audiofile} (\mbox{\hyperlink{structwav__body}{wav\+\_\+body}}, std\+::string)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classWav_aa61bf8ecec0e995e0f177267704999ac}\label{classWav_aa61bf8ecec0e995e0f177267704999ac}} 
+\index{Wav@{Wav}!combineHeaderAndBody@{combineHeaderAndBody}}
+\index{combineHeaderAndBody@{combineHeaderAndBody}!Wav@{Wav}}
+\doxysubsubsection{\texorpdfstring{combineHeaderAndBody()}{combineHeaderAndBody()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structwav__body}{wav\+\_\+body}} Wav\+::combine\+Header\+And\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structwav__header}{wav\+\_\+header}}}]{audiofile\+\_\+header,  }\item[{\mbox{\hyperlink{structwav__body}{wav\+\_\+body}}}]{audiofile\+\_\+body }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Combines data from audiofile\+\_\+header into audiofile\+\_\+body so that the data can be used easier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em audiofile\+\_\+header} & struct that only holds data fro the header of a WAV file \\
+\hline
+{\em audiofile\+\_\+body} & struct that holds both header data and body data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structwav__body}{wav\+\_\+body}} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wav.\+h\item 
+wav.\+cpp\end{DoxyCompactItemize}

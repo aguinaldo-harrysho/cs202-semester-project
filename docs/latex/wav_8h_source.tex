@@ -1,0 +1,23 @@
+\hypertarget{wav_8h_source}{}\doxysection{wav.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef WAV\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define WAV\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}wave\_header.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}wave\_body.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{comment}{//wav.cpp should be responsible for getting the data that isn't the header. Will likely extend the header in some way.}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{class }\mbox{\hyperlink{classWav}{Wav}} \{}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     \textcolor{keyword}{static} \mbox{\hyperlink{structwav__body}{wav\_body}} \mbox{\hyperlink{classWav_aa61bf8ecec0e995e0f177267704999ac}{combineHeaderAndBody}}(\mbox{\hyperlink{structwav__header}{wav\_header}}, \mbox{\hyperlink{structwav__body}{wav\_body}});}
+\DoxyCodeLine{14     \textcolor{keyword}{static} \mbox{\hyperlink{structwav__body}{wav\_body}} readBodyData(\mbox{\hyperlink{structwav__header}{wav\_header}}, std::string);}
+\DoxyCodeLine{15     \textcolor{keyword}{static} \textcolor{keywordtype}{void} writeAudiofile(\mbox{\hyperlink{structwav__body}{wav\_body}}, std::string); \textcolor{comment}{//Save a wav\_body as an actual playable wav file}}
+\DoxyCodeLine{16 \};}
+\DoxyCodeLine{17  }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
