@@ -144,6 +144,7 @@ wav_body Wav::readBodyData(wav_header audiofile_header, std::string filename)
                 position++;
                 //sampleBuffer[position] += normalizer;
                 bufferStereo[i] = sampleBuffer[position]; // Second sample saved to stero channel
+                
             }
             //std::cout << "I made it here" << std::endl;
             for(int i = 0; i < channelLength; i++)
@@ -319,7 +320,6 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
             {
                 //writer = std::bitset<8>(intbin).to_string();
                 unsigned int intbin = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
-                std::cout << intbin << std::endl;
                 myfile.write((char*) &intbin, 1);
             }
             else 
@@ -358,18 +358,39 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
             unsigned int intbin1 = audiofile_body.steroChannel_soundData.at(i);
             std::string writer;// = std::bitset<8>(intbin).to_string();
             std::string writer1;
+            std::string writer2;
             
             if(audiofile_body.bit_depth == 8)
             {
-                writer = std::bitset<8>(intbin).to_string();
-                writer1 = std::bitset<8>(intbin1).to_string();
+                unsigned int intbin1 = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+                myfile.write((char*) &intbin1, 1);
+                unsigned int intbin2 = audiofile_body.steroChannel_soundData.at(i) + unNormalizer;
+                myfile.write((char*) &intbin2, 1);
+                // writer = std::bitset<8>(intbin).to_string();
+                // writer1 = std::bitset<8>(intbin1).to_string();
             }
             else 
             {
-                writer = std::bitset<16>(intbin).to_string();
-                writer1 = std::bitset<16>(intbin1).to_string();
+                unsigned int tempor1 = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
+                unsigned int tempor2 = audiofile_body.steroChannel_soundData.at(i) + unNormalizer;
+                writer1 = std::bitset<16>(tempor1).to_string();
+                writer2 = std::bitset<16>(tempor2).to_string();
+                std::string sub1 = writer1.substr(0,8);
+                std::string sub2 = writer1.substr(8,8);
+                std::string sub12 = writer2.substr(0,8);
+                std::string sub22 = writer2.substr(8,8);
+                unsigned int suber1 = stoi(sub1, 0, 2);
+                unsigned int suber2 = stoi(sub2, 0, 2);
+                unsigned int suber12 = stoi(sub12, 0, 2);
+                unsigned int suber22 = stoi(sub22, 0, 2);
+                myfile.write((char*) &suber1, 1);
+                myfile.write((char*) &suber2, 1);
+                myfile.write((char*) &suber12, 1);
+                myfile.write((char*) &suber22, 1);
+                // writer = std::bitset<16>(intbin).to_string();
+                // writer1 = std::bitset<16>(intbin1).to_string();
             }
-            myfile << writer << writer1;
+            //myfile << writer << writer1;
         }
     }
     
