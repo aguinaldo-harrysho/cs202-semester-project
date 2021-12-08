@@ -271,12 +271,37 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     std::cout << bodySize << std::endl;
     std::cout << sampleAmount << std::endl;
     
-
-    int newSize = audiofile_body.monoChannel_sounData.size();
+    int newSize = 0;
+    //std::cout << "bit_depth: " << audiofile_body.bit_depth << std::endl;
+    if(audiofile_body.bit_depth == 8)
+    {
+        std::cout << "Bit Depth 8" << std::endl;
+        //std::cout << "newSize set to: " << audiofile_body.monoChannel_sounData.size() << std::endl;
+        newSize = audiofile_body.monoChannel_sounData.size();
+    }
+    else if(audiofile_body.bit_depth == 16)
+    {
+        std::cout << "Bit Depth 16" << std::endl;
+        newSize = audiofile_body.monoChannel_sounData.size() * 2;
+    }
+    if(audiofile_body.num_channels == 1)
+    {
+        std::cout << "Mono" << std::endl;
+    }
+    else if(audiofile_body.num_channels == 2)
+    {
+        newSize = newSize * 2;
+        std::cout << "Stereo" << std::endl;
+    }
+    std::cout << "At the end, newSize: " << newSize << std::endl;
+    std::cout << "Should be equal to: " << audiofile_body.data_bytes << std::endl;
+    
+    
 
     //Header writing code, bit_depth and num_channels don't matter for this. wav_size and data_btes need to be modified if an effect like echo made the vector longer.
     myfile.write(audiofile_body.riff_header, 4);
-    myfile.write((char*) &audiofile_body.wav_size, 4); // Change as needed
+    myfile.write((char*) &audiofile_body.wav_size, 4); // Change as needed. 36 + SubChunk2Size
+
     myfile.write(audiofile_body.wave_header, 4);
     myfile.write(audiofile_body.fmt_header, 4);
     myfile.write((char*) &audiofile_body.fmt_chunk_size, 4);
@@ -287,7 +312,7 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
     myfile.write((char*) &audiofile_body.sample_alignment, 2);
     myfile.write((char*) &audiofile_body.bit_depth, 2);
     myfile.write(audiofile_body.data_header, 4);
-    myfile.write((char*) &audiofile_body.data_bytes, 4); // Change as needed
+    myfile.write((char*) &newSize, 4); // Change as needed. == NumSamples * NumChannels * BitsPerSample/8
 
     //Header writing seems to work flawlessly but the body writing is having issues. Possible has something to with how it's converted when writen.
     int unNormalizer = 0;
@@ -296,19 +321,19 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
 
     if(audiofile_body.num_channels == 1)
     {
-        std::cout << "Mono" << std::endl;
+        //std::cout << "Mono" << std::endl;
         int tempest = audiofile_body.monoChannel_sounData.at(0);
         unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + unNormalizer;
-        std::cout << std::dec;
-        std::cout << "Vector value: ";
-        std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
-        std::cout << "Unsigned Int: ";
-        std::cout << tempor << std::endl;
-        std::string tempors = std::bitset<16>(tempor).to_string();
-        std::cout << "String: ";
-        std::cout << tempors << std::endl;
-        std::cout << "Char cast: ";
-        std::cout << (char*) &tempor << std::endl;
+        // std::cout << std::dec;
+        // std::cout << "Vector value: ";
+        // std::cout << audiofile_body.monoChannel_sounData.at(0) << std::endl;
+        // std::cout << "Unsigned Int: ";
+        // std::cout << tempor << std::endl;
+        // std::string tempors = std::bitset<16>(tempor).to_string();
+        // std::cout << "String: ";
+        // std::cout << tempors << std::endl;
+        // std::cout << "Char cast: ";
+        // std::cout << (char*) &tempor << std::endl;
 
 
         for(int i = 0; i < sampleAmount; i++)//sampleAmount
