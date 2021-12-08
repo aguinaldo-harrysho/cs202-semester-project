@@ -302,7 +302,7 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
         std::cout << (char*) &tempor << std::endl;
 
 
-        for(int i = 0; i < 8; i++)//sampleAmount
+        for(int i = 0; i < sampleAmount; i++)//sampleAmount
         {
             //int tempory = (int)audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
             //std::cout << audiofile_body.monoChannel_sounData.at(i) << std::endl;
@@ -324,13 +324,25 @@ void Wav::writeAudiofile(wav_body audiofile_body, std::string filename) //Save a
             }
             else 
             {
-                unsigned int tempor = audiofile_body.monoChannel_sounData.at(0) + unNormalizer;
+                unsigned int tempor = audiofile_body.monoChannel_sounData.at(i) + unNormalizer;
                 //std::string tempors = std::bitset<16>(tempor).to_string();
-                std::cout << tempor << std::endl;
-                //writer = std::bitset<16>(intbin).to_string();
-                std::cout << reinterpret_cast<char const *>(&tempor) << std::endl;
-                myfile.write(reinterpret_cast<char const *>(&tempor), sizeof tempor);
-                //myfile.write((char*) &tempor, 1);
+                //std::cout << tempor << std::endl;
+                writer = std::bitset<16>(tempor).to_string();
+                std::string sub1 = writer.substr(0,8);
+                std::string sub2 = writer.substr(8,8);
+                //std::cout << sub1 << std::endl;
+                //std::cout << sub2 << std::endl;
+                unsigned int suber1 = stoi(sub1, 0, 2);
+                unsigned int suber2 = stoi(sub2, 0, 2);
+                // std::cout << suber1 << std::endl;
+                // std::cout << suber2 << std::endl;
+
+                //std::cout << "String: ";
+                //std::cout << writer << std::endl;
+                //std::cout << reinterpret_cast<char const *>(&tempor) << std::endl;
+                //myfile.write(reinterpret_cast<char const *>(&writer), sizeof writer);
+                myfile.write((char*) &suber1, 1);
+                myfile.write((char*) &suber2, 1);
             }
             
         }
